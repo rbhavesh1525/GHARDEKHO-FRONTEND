@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"; 
 import { ArrowRight, ArrowLeft, Menu, X ,ChevronDown,User} from "lucide-react"; 
 import { motion } from "framer-motion";
+import { Bell, BellRing, BellOff, AlertCircle } from "lucide-react";
+
 
 
 function TopNavBar() {
@@ -51,7 +53,7 @@ function TopNavBar() {
     
           <nav className="hidden lg:flex flex-grow justify-center items-center space-x-8">
             <Link
-              to="/homepage"
+              to="/home"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
                          relative group hover:translate-x-2"
@@ -64,14 +66,14 @@ function TopNavBar() {
             </Link>
 
             <Link
-              to="/forum"
+              to="/postproperty"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
                          relative group hover:translate-x-2"
             >
               
               <ArrowLeft className="h-3 w-4  transform rotate-[130deg] group-hover:mr-8 absolute left-0 opacity-0 top-1/2 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
-              Forum
+              PostProperty
              
               <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
             </Link>
@@ -89,7 +91,7 @@ function TopNavBar() {
               <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
             </Link>
             <Link
-              to="/about"
+              to="/AboutUs"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
                          relative group hover:translate-x-2"
@@ -101,19 +103,26 @@ function TopNavBar() {
             </Link>
 
             <Link
-              to="/blogs"
+              to="/Help"
               className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
                          flex items-center space-x-1 px-3 py-2 rounded-lg
                          relative group hover:translate-x-2"
             >
              
               <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-              Blogs
+             Help
               <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
             </Link>
           </nav>
 
-          
+
+        <div className="Bellicon pr-7">
+          <Link to="/notifications" className="text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
+                         flex items-center space-x-1 px-3 py-2 rounded-lg
+                         relative group">
+           <Bell></Bell>
+           </Link>
+           </div>
           <div className="flex items-center space-x-4">
             <button
               className="lg:hidden p-2 text-gray-300 hover:text-gray-900"
