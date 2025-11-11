@@ -5,5 +5,9 @@ import Login from "./Login";
 import Signup from "./Signup";
 import Notifications from "./Notifications";
 import MyProperties from "./MyProperties";
+import PostProperty from "./PostProperty";
+import MyProfile from "./MyProfile";
 
-export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties };
+import Profile from "./Profile";
+
+export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile };

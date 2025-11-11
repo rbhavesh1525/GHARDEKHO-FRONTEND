@@ -1,6 +1,6 @@
 
 import './App.css'
-import {HomePage,Login,Signup,PropertyListingPage,Notifications,MyProperties} from './Pages/PageIndex';
+import {HomePage,Login,Signup,PropertyListingPage,Notifications,MyProperties,PostProperty,MyProfile} from './Pages/PageIndex';
 
 import { TopNavbar ,AboutUs,Help,Settings} from './Components/CompIndex';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
@@ -20,6 +20,8 @@ function App() {
         <Route path='/Settings' element={<><TopNavbar/><Settings/></>}/>
         <Route path='/Notifications' element={<><TopNavbar/><Notifications/></>}/>
         <Route path='/MyProperties' element={<><TopNavbar/><MyProperties/></>}/>
+        <Route path='/PostProperty' element={<><TopNavbar/><PostProperty/></>}/>
+        <Route path='/MyProfile' element={<><TopNavbar/><MyProfile/></>}/>
 
         
       </Routes>
