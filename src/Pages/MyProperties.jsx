@@ -32,7 +32,6 @@ export default function MyProperties() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [propertyToDelete, setPropertyToDelete] = useState(null);
 
-  // 🧠 Fetch current user (replace this with your auth logic)
   useEffect(() => {
     const loadUser = async () => {
       try {
@@ -46,7 +45,6 @@ export default function MyProperties() {
     loadUser();
   }, []);
 
-  // 🏡 Fetch user's properties
   useEffect(() => {
     if (!user) return;
 
@@ -66,7 +64,6 @@ export default function MyProperties() {
     fetchProperties();
   }, [user]);
 
-  // 🗑️ Delete property
   const confirmDelete = async () => {
     try {
       if (!propertyToDelete) return;
@@ -89,7 +86,10 @@ export default function MyProperties() {
   };
 
   return (
-    <div className="min-h-screen py-24 px-4 sm:px-6 lg:px-8">
+    <div
+      className="min-h-screen bg-gray-50 py-24 px-4 sm:px-6 lg:px-8 ml-64"
+      // 👆 Added ml-64 to make space for fixed sidebar
+    >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">

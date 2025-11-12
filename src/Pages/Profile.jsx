@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { User, Mail, Phone, Briefcase, Edit2, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -7,73 +7,34 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-// Example: replace with your actual API logic
-// import { base44 } from "@/api/base44Client";
-
 export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
-  const [user, setUser] = useState(null);
+
+  // Mock user data
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    role: "",
+    name: "Bhavesh Rathod",
+    email: "bhavesh@example.com",
+    phone: "+91 9876543210",
+    role: "buyer",
   });
-
-  useEffect(() => {
-    loadUser();
-  }, []);
-
-  const loadUser = async () => {
-    try {
-      const currentUser = await base44.auth.me(); // fetch user data
-      setUser(currentUser);
-      setFormData({
-        name: currentUser.full_name || "",
-        email: currentUser.email || "",
-        phone: currentUser.phone || "",
-        role: currentUser.role || "buyer",
-      });
-    } catch (error) {
-      console.error("Error loading user:", error);
-    }
-  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = async () => {
-    try {
-      await base44.auth.updateMe({
-        full_name: formData.name,
-        phone: formData.phone,
-        role: formData.role,
-      });
-      setIsEditing(false);
-      loadUser();
-      alert("Profile updated successfully!");
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      alert("Failed to update profile");
-    }
+  const handleSave = () => {
+    setIsEditing(false);
+    alert("Profile updated successfully (frontend only)");
   };
-
-  if (!user) {
-    return (
-      <div className="flex items-center justify-center h-96 text-gray-500">
-        Loading profile...
-      </div>
-    );
-  }
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
+      className="ml-64 min-h-screen p-20 bg-gray-50"
     >
-      <Card className="shadow-md">
+      <Card className="shadow-md max-w-3xl mx-auto">
         <CardHeader className="flex items-center justify-between">
           <CardTitle className="text-2xl font-bold text-gray-800">
             My Profile
@@ -101,7 +62,7 @@ export default function Profile() {
             ) : (
               <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
                 <User className="w-5 h-5 text-gray-500" />
-                <span className="text-gray-800">{formData.name || "—"}</span>
+                <span className="text-gray-800">{formData.name}</span>
               </div>
             )}
           </div>
@@ -130,7 +91,7 @@ export default function Profile() {
             ) : (
               <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
                 <Phone className="w-5 h-5 text-gray-500" />
-                <span className="text-gray-800">{formData.phone || "—"}</span>
+                <span className="text-gray-800">{formData.phone}</span>
               </div>
             )}
           </div>
@@ -164,10 +125,7 @@ export default function Profile() {
           {isEditing && (
             <div className="flex gap-3 mt-6">
               <Button
-                onClick={() => {
-                  setIsEditing(false);
-                  loadUser();
-                }}
+                onClick={() => setIsEditing(false)}
                 variant="outline"
                 className="flex-1"
               >

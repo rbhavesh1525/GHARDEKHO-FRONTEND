@@ -25,19 +25,20 @@ export default function MyProfileSidebar({ activeTab, setActiveTab }) {
   };
 
   return (
-    <aside className="w-64 bg-white shadow-md border-r border-gray-200 p-5 pt-22">
-      {/* <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-blue-600">GharDekho</h2>
-      </div> */}
-
+    <aside
+      className="fixed top-[70px] left-0 h-[calc(100vh-70px)] w-64 
+                 bg-white shadow-md border-r border-gray-200 p-5 
+                 flex flex-col justify-between overflow-y-auto"
+    >
+      {/* Navigation Section */}
       <nav className="space-y-2">
         {menuItems.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id)}
-            className={`flex items-center w-full gap-3 px-4 py-3 rounded-lg transition-all ${
+            className={`flex items-center w-full gap-3 px-4 py-3 rounded-lg transition-all text-[15px] ${
               activeTab === id
-                ? "bg-blue-100 text-blue-700 font-medium"
+                ? "bg-blue-100 text-blue-700 font-semibold"
                 : "text-gray-700 hover:bg-gray-100"
             }`}
           >
@@ -47,15 +48,16 @@ export default function MyProfileSidebar({ activeTab, setActiveTab }) {
         ))}
       </nav>
 
-      <hr className="my-6 border-gray-300" />
-
-      <button
-        onClick={handleLogout}
-        className="flex items-center gap-3 text-red-600 px-4 py-3 rounded-lg hover:bg-red-50 transition-all w-full"
-      >
-        <LogOut className="w-5 h-5" />
-        Logout
-      </button>
+      {/* Logout Button */}
+      <div className="mt-6 border-t border-gray-200 pt-4">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 text-red-600 px-4 py-3 rounded-lg hover:bg-red-50 transition-all w-full text-[15px]"
+        >
+          <LogOut className="w-5 h-5" />
+          Logout
+        </button>
+      </div>
     </aside>
   );
 }

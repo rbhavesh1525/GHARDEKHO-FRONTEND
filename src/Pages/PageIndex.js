@@ -8,6 +8,7 @@ import MyProperties from "./MyProperties";
 import PostProperty from "./PostProperty";
 import MyProfile from "./MyProfile";
 
-import Profile from "./Profile";
 
-export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile };
+import Profile from "./Profile";
+import ChatPage from "./ChatPage";
+export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile,ChatPage };

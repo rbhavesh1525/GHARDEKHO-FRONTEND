@@ -2,8 +2,9 @@
 import './App.css'
 import {HomePage,Login,Signup,PropertyListingPage,Notifications,MyProperties,PostProperty,MyProfile} from './Pages/PageIndex';
 
-import { TopNavbar ,AboutUs,Help,Settings} from './Components/CompIndex';
+import { TopNavbar ,AboutUs,Help,Settings,TestimonialsSection,WhyGharDekho} from './Components/CompIndex';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ChatPage } from './Pages/PageIndex';
 function App() {
  
 
@@ -22,7 +23,8 @@ function App() {
         <Route path='/MyProperties' element={<><TopNavbar/><MyProperties/></>}/>
         <Route path='/PostProperty' element={<><TopNavbar/><PostProperty/></>}/>
         <Route path='/MyProfile' element={<><TopNavbar/><MyProfile/></>}/>
-
+        <Route path='/Testimonials' element={<><TopNavbar/><TestimonialsSection/></>}/>
+        <Route  path='/Chat' element={<><TopNavbar/> <ChatPage/></>}/>
         
       </Routes>
       </Router>

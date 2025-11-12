@@ -1,269 +1,159 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; 
-import { ArrowRight, ArrowLeft, Menu, X ,ChevronDown,User} from "lucide-react"; 
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X, ChevronDown, User, Bell } from "lucide-react";
 import { motion } from "framer-motion";
-import { Bell, BellRing, BellOff, AlertCircle } from "lucide-react";
 
-
-
-function TopNavBar() {
+export default function TopNavBar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [islogin,setIslogin] = useState(false);
+  const [islogin, setIslogin] = useState(true); // for demo
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const navigate = useNavigate();
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const toggleDropdown=()=>{
-    setIsDropdownOpen(!isDropdownOpen);
-  }
-
-    // useEffect(()=>{
-    //   checkLoginStatus();
-    // },[]);
-
-//   const checkLoginStatus = async () => {
-//     const token = localStorage.getItem('token');
-//     setIslogin(!!token); 
-//     console.log(token)
-//   }
-  
- 
-
-  // const logout = useAuthStore((state) => state.logout);
-
-  // const handleLogout =()=>{
-  // //  logout();
-  //   setIslogin(false);
-  //   navigate('/home')
-    
-  // }
-  
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-8xl mx-auto p-1">
-        <div className="flex items-center justify-between px-8 py-5 bg-gray-200/30 backdrop-blur-[10px] rounded-full">
-          
-          <div className="text-xl font-bold text-gray-800">GharDekho</div>
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-3 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/home" className="flex items-center gap-2">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/727/727606.png"
+            alt="logo"
+            className="h-8 w-8"
+          />
+          <span className="text-2xl font-semibold text-gray-800">
+            Ghar <span className="text-blue-600">Dekho</span>
+          </span>
+        </Link>
 
-    
-          <nav className="hidden lg:flex flex-grow justify-center items-center space-x-8">
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-10">
+          {[
+            { label: "Home", link: "/home" },
+            { label: "About Us", link: "/AboutUs" },
+            { label: "Help", link: "/Help" },
+            { label: "Chats", link: "/chat" },
+          ].map((item) => (
             <Link
-              to="/home"
-              className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
+              key={item.label}
+              to={item.link}
+              className="text-[15px] font-medium text-gray-800 hover:text-blue-600 transition-all duration-200"
             >
-             
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] mr-1 absolute right-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-              Home
-          
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
+              {item.label}
             </Link>
+          ))}
+        </nav>
 
-            <Link
-              to="/Postproperty"
-              className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
-            >
-              
-              <ArrowLeft className="h-3 w-4  transform rotate-[130deg] group-hover:mr-8 absolute left-0 opacity-0 top-1/2 group-hover:opacity-100 transition-opacity duration-500 ease-in-out" />
-              PostProperty
-             
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
-            </Link>
+        {/* Right Section */}
+        <div className="flex items-center space-x-6">
+          {/* Notification Bell */}
+          <Link
+            to="/notifications"
+            className="relative text-gray-700 hover:text-blue-600 transition-all duration-200"
+          >
+            <Bell className="h-5 w-5" />
+            {/* Notification Badge */}
+            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-semibold rounded-full px-1.5 py-[1px]">
+              2
+            </span>
+          </Link>
 
-            <Link
-              to="/chat"
-              className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
-            >
-             
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-               Chat
-           
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
-            </Link>
-            <Link
-              to="/AboutUs"
-              className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
-            >
-             
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-              About us 
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
-            </Link>
+          {/* Login or User Dropdown */}
+          {islogin ? (
+            <div className="relative">
+              <button
+                onClick={toggleDropdown}
+                className="flex items-center space-x-2 text-gray-800 hover:text-blue-600 transition-all duration-200"
+              >
+                <User className="h-6 w-6 bg-gray-200 rounded-full p-1" />
+                <span className="font-medium text-[15px]">Bhavesh Rathod</span>
+                <ChevronDown className="h-4 w-4" />
+              </button>
 
-            <Link
-              to="/Help"
-              className="text-sm text-gray-900 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
-            >
-             
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-             Help
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1 absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
-            </Link>
-          </nav>
-
-
-        <div className="Bellicon pr-7">
-          <Link to="/notifications" className="text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group">
-           <Bell></Bell>
-           </Link>
-           </div>
-          <div className="flex items-center space-x-4">
-            <button
-              className="lg:hidden p-2 text-gray-300 hover:text-gray-900"
-              onClick={toggleMobileMenu}
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
-            </button>
-
-
-            {!islogin?(
-              <>
-              
-            <Link
-              to="/Login"
-              className="text-sm font-medium text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                         flex items-center space-x-1 px-3 py-2 rounded-lg
-                         relative group hover:translate-x-2"
-            >
-              <ArrowLeft className="h-3 w-4 transform rotate-[130deg] group-hover:mr-2 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-              Login
-              <ArrowRight className="h-3 w-4 transform -rotate-[50deg]  absolute -right-1 opacity-100 group-hover:opacity-0 transition-opacity duration-500 ease-in-out" />
-            </Link>
-          </>
-            ): (
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className="flex items-center text-gray-700 hover:text-gray-900 space-x-2"
+              {isDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="absolute right-0 mt-3 w-48 bg-white border border-gray-100 rounded-md shadow-lg py-2"
                 >
-                  <User className="h-6 w-6" />
-                  <ChevronDown className="h-4 w-4" />
-                </button>
-                {isDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50"
+                  <Link
+                    to="/Myprofile"
+                    className="block px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50"
                   >
+                    Profile
+                  </Link>
+                  <Link
+                    to="/settings"
+                    className="block px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50"
+                  >
+                    Settings
+                  </Link>
+                  <button
+                    onClick={() => {
+                      setIslogin(false);
+                      setIsDropdownOpen(false);
+                      navigate("/home");
+                    }}
+                    className="block w-full text-left px-4 py-2 text-[15px] text-gray-700 hover:bg-gray-50"
+                  >
+                    Logout
+                  </button>
+                </motion.div>
+              )}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="px-5 py-2 rounded-md text-[15px] font-medium text-white bg-blue-600 hover:bg-blue-700 transition"
+            >
+              Login
+            </Link>
+          )}
 
-<button
-                      className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-                      onClick={() => setIsDropdownOpen(false)}
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Profile
-                    </Link>
-                    <Link
-                      to="/help"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Help
-                    </Link>
-                    <Link
-                      to="/settings"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Settings
-                    </Link>
-                    <button
-                      onClick={"handleLogout"} 
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      Logout
-                    </button>
-                  </motion.div>
-                )}
-              </div>
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 text-gray-700 hover:text-blue-600"
+            onClick={toggleMobileMenu}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
             )}
-          
-          </div>
-          
+          </button>
         </div>
-        
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="lg:hidden mt-2">
-            <nav className="flex flex-col space-y-2 px-6 py-4 bg-gray-200/30 backdrop-blur-[10px] rounded-2xl">
-
-              <Link
-                to="/homepage"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                Home
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-              <Link
-                to="/forum"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                Forum
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-              <Link
-                to="/chat"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                Stranger Chat
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-
-              <Link
-                to="/about"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                About us 
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-
-              <Link
-                to="/blogs"
-                className="text-sm text-gray-700 hover:text-gray-900 transition-all duration-500 ease-in-out
-                           flex items-center space-x-1 px-3 py-2 rounded-lg hover:translate-x-2"
-              >
-                <ArrowLeft className="h-3 w-4 transform rotate-[130deg] ml-1 absolute left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out top-1/2" />
-                About us 
-                <ArrowRight className="h-3 w-4 transform -rotate-[50deg] mr-1" />
-              </Link>
-            </nav>
-          </div>
-        )}
       </div>
-    </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <motion.nav
+          initial={{ opacity: 0, y: -15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="lg:hidden mt-2 bg-white border-t border-gray-100 shadow-md px-8 py-6 text-gray-800"
+        >
+          <ul className="space-y-4">
+            {[
+              { label: "Home", link: "/home" },
+              { label: "About Us", link: "/AboutUs" },
+              { label: "Help", link: "/Help" },
+              { label: "Chats", link: "/chat" },
+              { label: "Notifications", link: "/notifications" },
+            ].map((item) => (
+              <li key={item.label}>
+                <Link
+                  to={item.link}
+                  className="block text-[16px] font-medium hover:text-blue-600 transition-all duration-300"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </motion.nav>
+      )}
+    </header>
   );
 }
-
-export default TopNavBar;

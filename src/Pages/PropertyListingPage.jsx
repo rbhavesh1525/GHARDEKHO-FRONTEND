@@ -29,7 +29,7 @@ function PropertyListingPage() {
   return (
     <>
     <TopNavBar/>
-    <div className="min-h-screen flex bg-gray-50 pt-16">
+    <div className="min-h-screen flex bg-gray-50 mt-16">
       {/* Sidebar */}
       <PropertyFilterSidebar
         selectedType={selectedType}
@@ -42,7 +42,7 @@ function PropertyListingPage() {
       />
 
       {/* Property Cards */}
-      <main className="flex-1 p-8 overflow-y-auto">
+      <main className="flex-1 p-8  overflow-y-auto">
         <h1 className="text-3xl font-bold text-gray-800 capitalize mb-8">
           {selectedType ? `${selectedType} Properties` : "All Properties"}
         </h1>

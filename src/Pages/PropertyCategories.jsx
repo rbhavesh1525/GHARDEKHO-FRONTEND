@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { WhyGharDekho } from "@/Components/CompIndex";
 import { Home, Building, Building2, Castle, Warehouse } from "lucide-react";
 
 
@@ -51,6 +52,8 @@ export default function PropertyCategories() {
   };
 
   return (
+    <>
+
     <section className="py-20 px-6 md:px-16 bg-white">
       <div className="max-w-7xl mx-auto">
         {/* 🔹 Section Header */}
@@ -103,5 +106,7 @@ export default function PropertyCategories() {
         </div>
       </div>
     </section>
+        <WhyGharDekho/>
+    </>
   );
 }
