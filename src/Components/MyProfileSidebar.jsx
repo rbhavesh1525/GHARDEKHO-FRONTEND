@@ -26,7 +26,7 @@ export default function MyProfileSidebar({ activeTab, setActiveTab }) {
 
   return (
     <aside
-      className="fixed top-[70px] left-0 h-[calc(100vh-70px)] w-64 
+      className="fixed top-[58px] left-0 h-[calc(100vh-70px)] w-64 
                  bg-white shadow-md border-r border-gray-200 p-5 
                  flex flex-col justify-between overflow-y-auto"
     >

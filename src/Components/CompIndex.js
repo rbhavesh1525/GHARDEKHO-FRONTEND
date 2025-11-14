@@ -8,4 +8,5 @@ import HeroSearch from "./HeroSearch";
 import TestimonialsSection from "./TestimonialsSection";
 import WhyGharDekho from "./WhyGharDekho";
 import Footer from "./Footer";
-export {TopNavbar,PropertyFilterSidebar,AboutUs,Help,Settings,MyProfileSidebar,HeroSearch,TestimonialsSection,WhyGharDekho,Footer};
+import ChatModal from "./ChatModal";
+export {TopNavbar,PropertyFilterSidebar,AboutUs,Help,Settings,MyProfileSidebar,HeroSearch,TestimonialsSection,WhyGharDekho,Footer,ChatModal};

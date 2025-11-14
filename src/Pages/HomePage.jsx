@@ -9,11 +9,8 @@ function HomePage() {
     <>
     <HeroSearch />
     <div className="flex flex-col min-h-screen overflow-x-hidden">
-      {/* 🏠 Hero Section */}
-      
-    
-      {/* 🏡 Browse Property Section */}
-      <section className="w-full bg-white py-16">
+     
+      <section className="w-full bg-white ">
         <BrowseProperty />
       </section>
     </div>

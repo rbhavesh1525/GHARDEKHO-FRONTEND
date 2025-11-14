@@ -8,7 +8,9 @@ import MyProperties from "./MyProperties";
 import PostProperty from "./PostProperty";
 import MyProfile from "./MyProfile";
 
-
+import OTPVerification from "./OTPVerication";
 import Profile from "./Profile";
 import ChatPage from "./ChatPage";
-export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile,ChatPage };
+import MostVisitedProperties from "./MostVisitedProperties";
+import PropertyDetail from "./PropertyDetails"; 
+export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile,ChatPage,OTPVerification,MostVisitedProperties,PropertyDetail };
