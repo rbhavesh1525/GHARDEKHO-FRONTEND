@@ -7,40 +7,52 @@ export default function AdminStatsCards() {
       title: "Total Users",
       value: 4,
       icon: Users,
-      bg: "bg-blue-600",
+      color: "bg-blue-900/10 text-blue-900",
     },
     {
       title: "Total Properties",
       value: 17,
       icon: Building2,
-      bg: "bg-green-600",
+      color: "bg-green-600/10 text-green-700",
     },
     {
       title: "Active Listings",
       value: 17,
       icon: TrendingUp,
-      bg: "bg-purple-600",
+      color: "bg-purple-700/10 text-purple-700",
     },
     {
       title: "Total Chats",
       value: 4,
       icon: MessageCircle,
-      bg: "bg-orange-600",
+      color: "bg-orange-500/10 text-orange-600",
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 mt-22 px-20">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 mt-24 px-20">
       {cards.map((card, index) => (
         <div
           key={index}
-          className="bg-white p-6 rounded-2xl shadow-md border border-slate-100 hover:shadow-lg transition"
+          className="
+            bg-white p-7 rounded-2xl shadow-lg border border-blue-900/10 
+            hover:shadow-xl hover:-translate-y-1 transition-all duration-300
+          "
         >
-          <div className={`${card.bg} w-12 h-12 rounded-xl flex items-center justify-center mb-6`}>
-            <card.icon className="w-7 h-7 text-white" />
+          {/* Icon Container */}
+          <div
+            className={`${card.color} w-14 h-14 rounded-xl flex items-center justify-center mb-5`}
+          >
+            <card.icon className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl font-bold text-slate-900">{card.value}</h2>
-          <p className="text-slate-600 mt-1 text-sm">{card.title}</p>
+
+          {/* Number */}
+          <h2 className="text-4xl font-extrabold text-blue-900 tracking-tight">
+            {card.value}
+          </h2>
+
+          {/* Title */}
+          <p className="text-slate-600 text-sm mt-1">{card.title}</p>
         </div>
       ))}
     </div>

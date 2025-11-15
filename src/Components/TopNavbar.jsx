@@ -50,6 +50,15 @@ export default function TopNavBar() {
         {/* Right Side */}
         <div className="flex items-center space-x-6">
 
+          {/* Upload Button 🚀 */}
+          <button
+            onClick={() => navigate("/postproperty")}
+            className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl 
+                       font-semibold shadow-md transition-all duration-300 hidden md:block"
+          >
+            Upload for FREE
+          </button>
+
           {/* Notifications */}
           <Link to="/notifications" className="relative cursor-pointer">
             <Bell className="h-5 w-5 text-gray-700 hover:text-blue-900 transition" />

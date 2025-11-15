@@ -17,37 +17,44 @@ export default function AdminDashboard() {
 
   return (
     <>
-    <AdminNavbar/>
-    <AdminTabs/>
-    <div className="w-full p-15">
-      {/* TAB BUTTONS */}
-      <div className="flex gap-4 mb-8">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`
-              flex items-center gap-2 px-6 py-3 rounded-xl font-medium 
-              border transition
-              ${activeTab === tab.id 
-                ? "bg-blue-900 text-white border-blue-900 shadow-md" 
-                : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
-              }
-            `}
-          >
-            <tab.icon className="w-4 h-4" />
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <AdminNavbar />
+      <AdminTabs />
 
-      {/* RENDER SELECTED COMPONENT */}
-      <div className="mt-4">
-        {activeTab === "properties" && <TotalProperties />}
-        {activeTab === "users" && <TotalUsers />}
-        {activeTab === "chats" && <UserChats />}
+      <div className="w-full p-10 bg-[#f7f9fc] min-h-screen">
+
+        {/* TAB BUTTONS */}
+        <div className="flex gap-4 mb-10">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`
+                flex items-center gap-2 px-6 py-3 rounded-xl font-medium 
+                border transition-all duration-200 shadow-sm
+                ${
+                  activeTab === tab.id
+                    ? "bg-[#0A1E5E] text-white border-[#0A1E5E] shadow-lg scale-[1.03]"
+                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 hover:shadow-md"
+                }
+              `}
+            >
+              <tab.icon
+                className={`w-4 h-4 ${
+                  activeTab === tab.id ? "text-white" : "text-slate-700"
+                }`}
+              />
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* RENDER SELECTED COMPONENT */}
+        <div className="mt-4">
+          {activeTab === "properties" && <TotalProperties />}
+          {activeTab === "users" && <TotalUsers />}
+          {activeTab === "chats" && <UserChats />}
+        </div>
       </div>
-    </div>
     </>
   );
 }

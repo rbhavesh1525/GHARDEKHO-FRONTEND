@@ -4,39 +4,63 @@ import { Badge } from "@/components/ui/badge";
 
 export default function TotalUsers({ data = [], loading = false }) {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-lg overflow-x-auto">
-      <h2 className="text-2xl font-bold mb-6">Manage Users</h2>
+    <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-900/10 overflow-x-auto">
+
+      <h2 className="text-3xl font-bold text-blue-900 mb-6">
+        Manage Users
+      </h2>
 
       {loading ? (
         <div className="space-y-4">
-          {[1,2,3].map(n => <Skeleton key={n} className="h-16 w-full" />)}
+          {[1, 2, 3].map((n) => (
+            <Skeleton key={n} className="h-16 w-full rounded-xl" />
+          ))}
         </div>
       ) : (
-        <table className="w-full">
+        <table className="w-full text-left">
           <thead>
-            <tr className="text-left">
-              <th>User</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Joined</th>
+            <tr className="bg-blue-900/10 text-blue-900">
+              <th className="px-4 py-3 font-semibold">User</th>
+              <th className="px-4 py-3 font-semibold">Email</th>
+              <th className="px-4 py-3 font-semibold">Role</th>
+              <th className="px-4 py-3 font-semibold">Joined</th>
             </tr>
           </thead>
+
           <tbody>
             {data.map((u) => (
-              <tr key={u.id} className="border-b">
-                <td className="flex items-center gap-3 py-3">
-                  <div className="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center text-white font-semibold">
+              <tr
+                key={u.id}
+                className="border-b border-gray-200 hover:bg-blue-900/5 transition"
+              >
+                {/* User Name + Avatar */}
+                <td className="flex items-center gap-3 px-4 py-4">
+                  <div className="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center text-white font-semibold shadow">
                     {u.full_name[0]?.toUpperCase()}
                   </div>
-                  {u.full_name}
+                  <span className="font-medium text-slate-800">{u.full_name}</span>
                 </td>
-                <td>{u.email}</td>
-                <td>
-                  <Badge className={u.role === "admin" ? "bg-purple-200 text-purple-800" : "bg-blue-200 text-blue-800"}>
+
+                {/* Email */}
+                <td className="px-4 text-slate-700">{u.email}</td>
+
+                {/* Role Badge */}
+                <td className="px-4">
+                  <Badge
+                    className={`px-3 py-1 text-sm capitalize ${
+                      u.role === "admin"
+                        ? "bg-orange-100 text-orange-700"
+                        : "bg-blue-100 text-blue-800"
+                    }`}
+                  >
                     {u.role}
                   </Badge>
                 </td>
-                <td>{new Date(u.created_date).toLocaleDateString()}</td>
+
+                {/* Join Date */}
+                <td className="px-4 text-slate-600">
+                  {new Date(u.created_date).toLocaleDateString()}
+                </td>
               </tr>
             ))}
           </tbody>
