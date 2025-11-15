@@ -34,7 +34,6 @@ export default function OTPVerification({
 
   const handleVerify = () => {
     const code = otp.join("");
-
     if (code.length === 6) {
       onVerify(code);
     } else {
@@ -43,29 +42,30 @@ export default function OTPVerification({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999] p-4">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
 
-      {/* White Modal Card */}
-      <div className="relative bg-white p-8 rounded-2xl w-[90%] max-w-sm border border-gray-200 shadow-xl">
+      {/* Modal Card */}
+      <div className="relative bg-white p-8 rounded-2xl w-[90%] max-w-sm border border-blue-900/20 shadow-2xl">
 
-        {/* Close Button INSIDE modal */}
+        {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-black cursor-pointer"
+          className="absolute top-3 right-3 text-gray-600 hover:text-blue-900 cursor-pointer"
         >
           <X className="h-6 w-6" />
         </button>
 
-        <h1 className="text-center text-2xl font-bold text-gray-800 mb-2">
+        {/* Heading */}
+        <h1 className="text-center text-2xl font-bold text-blue-900 mb-2">
           OTP Verification
         </h1>
 
         <p className="text-center text-gray-600 mb-6 text-sm leading-relaxed">
-          OTP has been sent to <strong>{mobile}</strong> <br />
-          Please enter the 6-digit OTP to continue.
+          OTP sent to <strong className="text-blue-900">{mobile}</strong> <br />
+          Enter the 6-digit OTP below.
         </p>
 
-        {/* OTP Inputs */}
+        {/* OTP Boxes */}
         <div className="flex justify-between mb-8">
           {[0, 1, 2, 3, 4, 5].map((i) => (
             <input
@@ -76,16 +76,16 @@ export default function OTPVerification({
               value={otp[i]}
               onChange={(e) => handleChange(e.target.value, i)}
               onKeyDown={(e) => handleKeyDown(e, i)}
-              className="w-12 h-12 border border-gray-300 rounded-lg text-center text-xl font-semibold shadow-sm 
-              focus:ring-2 focus:ring-blue-500 outline-none"
+              className="w-12 h-12 border border-blue-900/40 rounded-lg text-center text-xl font-bold 
+              focus:ring-2 focus:ring-blue-900 outline-none shadow-sm"
             />
           ))}
         </div>
 
-        {/* Verify button */}
+        {/* Verify Button */}
         <button
           onClick={handleVerify}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold cursor-pointer shadow-md"
+          className="w-full bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-md text-[15px] font-semibold shadow-md cursor-pointer"
         >
           Verify OTP
         </button>
@@ -96,7 +96,7 @@ export default function OTPVerification({
             Didn’t receive OTP?{" "}
             <span
               onClick={onResend}
-              className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer"
+              className="text-orange-500 hover:text-orange-600 font-semibold cursor-pointer"
             >
               Resend
             </span>
@@ -106,16 +106,15 @@ export default function OTPVerification({
         {/* Change Number */}
         <div className="text-center mt-2 text-sm">
           <span className="text-gray-600">
-            Entered wrong number?{" "}
+            Wrong number?{" "}
             <span
               onClick={onChangeNumber}
-              className="text-red-500 hover:text-red-600 font-medium cursor-pointer"
+              className="text-red-600 hover:text-red-700 font-semibold cursor-pointer"
             >
               Change Number
             </span>
           </span>
         </div>
-
       </div>
     </div>
   );

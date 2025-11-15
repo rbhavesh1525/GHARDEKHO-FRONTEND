@@ -23,12 +23,9 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
   const handleSignup = (e) => {
     e.preventDefault();
 
-    // Later you will call backend API here to send OTP
-    // For now only open OTP modal
-    
-
-    onOpenOTP(formData.phone);  // pass phone to OTP modal
-        onClose();     // close signup modal
+    // Later backend API
+    onOpenOTP(formData.phone);
+    onClose();
   };
 
   return (
@@ -37,22 +34,22 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
       {/* Close Button */}
       <button
         onClick={onClose}
-        className="absolute top-6 right-6 text-white hover:text-gray-300 cursor-pointer"
+        className="absolute top-6 right-6 text-white hover:text-orange-300 cursor-pointer transition"
       >
-        <X className="h-7 w-7"/>
+        <X className="h-7 w-7" />
       </button>
 
       {/* Signup Card */}
-      <div className="bg-white p-8 rounded-2xl w-[90%] max-w-md shadow-xl border border-gray-200">
+      <div className="bg-white p-8 rounded-2xl w-[90%] max-w-md shadow-2xl border border-blue-900/20">
 
         {/* Logo */}
         <div className="text-center mb-6">
           <img
             src={GharDekhoLogo}
             alt="logo"
-            className="w-20 h-20 mx-auto rounded-full border border-gray-300 shadow-md"
+            className="w-20 h-20 mx-auto rounded-full border border-blue-900/30 shadow-md"
           />
-          <h1 className="text-gray-800 text-2xl font-bold mt-3">
+          <h1 className="text-blue-900 text-3xl font-bold mt-3 tracking-wide">
             Create Account
           </h1>
         </div>
@@ -60,38 +57,43 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
         {/* Progress Bar */}
         <div className="w-full h-2 bg-gray-200 rounded-full mb-6 overflow-hidden">
           <div
-            className="h-2 bg-blue-600 transition-all duration-500"
+            className="h-2 bg-orange-500 transition-all duration-500"
             style={{ width: `${progress}%` }}
           />
         </div>
 
         {/* Form */}
         <form className="space-y-5" onSubmit={handleSignup}>
-  {[
-    { name: "name", placeholder: "Full Name" },
-    { name: "phone", placeholder: "Phone Number" },
-    { name: "email", placeholder: "Email Address" },
-    { name: "password", placeholder: "Password", type: "password" },
-    { name: "confirmPassword", placeholder: "Confirm Password", type: "password" }
-  ].map((field) => (
-    <input
-      key={field.name}
-      type={field.type || "text"}
-      name={field.name}
-      placeholder={field.placeholder}
-      value={formData[field.name]}
-      onChange={(e) =>
-        setFormData({ ...formData, [field.name]: e.target.value })
-      }
-      className="w-full px-4 py-3 border rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-    />
-  ))}
+          {[
+            { name: "name", placeholder: "Full Name" },
+            { name: "phone", placeholder: "Phone Number" },
+            { name: "email", placeholder: "Email Address" },
+            { name: "password", placeholder: "Password", type: "password" },
+            { name: "confirmPassword", placeholder: "Confirm Password", type: "password" },
+          ].map((field) => (
+            <input
+              key={field.name}
+              type={field.type || "text"}
+              name={field.name}
+              placeholder={field.placeholder}
+              value={formData[field.name]}
+              onChange={(e) =>
+                setFormData({ ...formData, [field.name]: e.target.value })
+              }
+              className="w-full px-4 py-3 border border-blue-900/30 rounded-lg shadow-sm 
+                         text-blue-900 placeholder-gray-500
+                         focus:ring-2 focus:ring-orange-500 focus:border-orange-500 outline-none"
+            />
+          ))}
 
-  <button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-md font-semibold shadow-md cursor-pointer">
-    Sign Up
-  </button>
-</form>
-
+          <button
+            type="submit"
+            className="w-full bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-lg 
+                       font-semibold shadow-md transition cursor-pointer"
+          >
+            Sign Up
+          </button>
+        </form>
 
         {/* Already Registered */}
         <div className="text-center mt-6 text-sm text-gray-700">
@@ -101,7 +103,7 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
               onClose();
               onOpenLogin();
             }}
-            className="text-blue-600 hover:text-blue-700 cursor-pointer font-semibold"
+            className="text-orange-500 hover:text-orange-600 cursor-pointer font-semibold"
           >
             Login
           </span>

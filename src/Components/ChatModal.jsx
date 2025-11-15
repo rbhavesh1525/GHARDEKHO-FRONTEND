@@ -17,20 +17,20 @@ export default function ChatModal({ open, onClose, property, onSend }) {
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
       
-      <div className="bg-white w-[90%] max-w-md rounded-2xl shadow-xl p-6 relative">
+      <div className="bg-white w-[90%] max-w-md rounded-2xl shadow-xl p-6 relative border border-blue-900/20">
 
         {/* Close Button */}
-        <button 
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
+        <button
+          className="absolute top-3 right-3 text-blue-900 hover:text-orange-500 transition"
           onClick={onClose}
         >
           <X className="w-6 h-6" />
         </button>
 
         {/* Header */}
-        <h2 className="text-xl font-bold mb-2">Contact Owner</h2>
-        <p className="text-gray-500 text-sm mb-4">
-          Property: <span className="font-semibold">{property.title}</span>
+        <h2 className="text-xl font-bold text-blue-900 mb-2">Contact Owner</h2>
+        <p className="text-gray-600 text-sm mb-4">
+          Property: <span className="font-semibold text-blue-900">{property.title}</span>
         </p>
 
         {/* Preset Options */}
@@ -39,7 +39,7 @@ export default function ChatModal({ open, onClose, property, onSend }) {
             <button
               key={i}
               onClick={() => setMessage(text)}
-              className="w-full text-left px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm"
+              className="w-full text-left px-3 py-2 bg-blue-900/10 hover:bg-blue-900/20 rounded-lg text-sm text-blue-900 font-medium transition"
             >
               {text}
             </button>
@@ -52,7 +52,7 @@ export default function ChatModal({ open, onClose, property, onSend }) {
           onChange={(e) => setMessage(e.target.value)}
           rows={3}
           placeholder="Type your message..."
-          className="w-full border rounded-lg p-3 focus:outline-blue-600"
+          className="w-full border border-blue-900/30 rounded-lg p-3 text-blue-900 focus:outline-orange-500"
         />
 
         {/* Send Button */}
@@ -62,11 +62,12 @@ export default function ChatModal({ open, onClose, property, onSend }) {
             setMessage("");
             onClose();
           }}
-          className="w-full mt-4 bg-blue-900 hover:bg-blue-800 text-white rounded-xl flex items-center justify-center gap-2"
+          className="w-full mt-4 bg-blue-900 hover:bg-blue-800 text-white rounded-xl flex items-center justify-center gap-2 py-3 text-[16px]"
         >
-          <MessageCircle className="w-5 h-5" />
+          <MessageCircle className="w-5 h-5 text-orange-500" />
           Send Message
         </Button>
+
       </div>
     </div>
   );
