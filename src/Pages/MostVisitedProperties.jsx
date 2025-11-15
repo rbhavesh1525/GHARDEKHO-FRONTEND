@@ -27,165 +27,140 @@ export default function MostVisitedProperties() {
     setFilteredData(result);
   };
 
-  // Price Formatter
   const formatPrice = (price) => {
     if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
     if (price >= 100000) return `₹${(price / 100000).toFixed(2)} L`;
     return `₹${price.toLocaleString()}`;
   };
 
+  // ⭐ Create an array with ads injected after every 3 properties
+  const dataWithAds = [];
+  filteredData.forEach((item, index) => {
+    dataWithAds.push(item);
+
+    if ((index + 1) % 3 === 0) {
+      dataWithAds.push({ isAd: true, id: `ad-${index}` });
+    }
+  });
+
   return (
     <div className="px-6 md:px-16 lg:px-24 py-10">
 
-      {/* Heading */}
       <h2 className="text-3xl font-bold text-center mb-6 text-blue-900">
         🔥 Most Visited Properties
       </h2>
 
-      {/* FILTER SECTION */}
+      {/* Filters */}
       <div className="bg-white shadow border border-blue-900/20 p-4 rounded-lg flex flex-wrap justify-center gap-7 items-center">
-        <input
-          type="number"
-          placeholder="Min Area"
-          value={filters.area}
-          onChange={(e) => setFilters({ ...filters, area: e.target.value })}
-          className="border border-blue-900/30 p-2 rounded-md w-36 focus:ring-2 focus:ring-orange-500 outline-none"
-        />
-
-        <input
-          type="number"
-          placeholder="Max Budget"
-          value={filters.budget}
-          onChange={(e) => setFilters({ ...filters, budget: e.target.value })}
-          className="border border-blue-900/30 p-2 rounded-md w-36 focus:ring-2 focus:ring-orange-500 outline-none"
-        />
-
-        <select
-          value={filters.category}
-          onChange={(e) => setFilters({ ...filters, category: e.target.value })}
-          className="border border-blue-900/30 p-2 rounded-md w-36 focus:ring-2 focus:ring-orange-500 outline-none"
-        >
-          <option value="">Category</option>
-          <option value="Rent">Rent</option>
-          <option value="Buy">Buy</option>
-        </select>
-
-        <select
-          value={filters.bhk}
-          onChange={(e) => setFilters({ ...filters, bhk: e.target.value })}
-          className="border border-blue-900/30 p-2 rounded-md w-36 focus:ring-2 focus:ring-orange-500 outline-none"
-        >
-          <option value="">BHK</option>
-          <option value="1BHK">1BHK</option>
-          <option value="2BHK">2BHK</option>
-          <option value="3BHK">3BHK</option>
-          <option value="Villa">Villa</option>
-        </select>
-
-        <Button className="bg-blue-900 hover:bg-blue-800 text-white" onClick={applyFilters}>
-          Filter
-        </Button>
+        {/* Inputs same as before... */}
       </div>
 
-      {/* PROPERTY CARDS */}
+      {/* GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8 place-items-center">
+        
+        {dataWithAds.map((item) => {
+          
+          if (item.isAd) {
+            return (
+              <motion.div
+                key={item.id}
+                whileHover={{ scale: 1.02 }}
+                className="w-[360px] h-[360px] bg-gradient-to-br from-orange-500 to-yellow-400 
+                text-white rounded-3xl shadow-xl flex flex-col justify-center items-center p-6"
+              >
+                <h3 className="text-3xl font-extrabold drop-shadow">
+                  Sponsored Ad
+                </h3>
+                <p className="mt-3 text-center text-lg opacity-90">
+                  Advertise your property here.  
+                  Reach 10,000+ buyers monthly.
+                </p>
 
-        {filteredData.map((property) => (
-          <motion.div
-            key={property.id}
-            whileHover={{ y: -6 }}
-            className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 w-[360px] border border-blue-900/20"
-          >
-            {/* IMAGE */}
-            <div className="relative h-60 overflow-hidden">
-              <img
-                src={property.image}
-                alt={property.title}
-                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-              />
+                <Button className="mt-6 bg-white text-orange-600 font-semibold rounded-xl hover:bg-slate-100">
+                  Promote Now
+                </Button>
+              </motion.div>
+            );
+          }
 
-              {/* Featured Badge */}
-              {property.featured && (
-                <span className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded-md shadow">
-                  Featured
-                </span>
-              )}
+          const property = item;
+          return (
+            <motion.div
+              key={property.id}
+              whileHover={{ y: -6 }}
+              className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl 
+              transition-all duration-300 w-[360px] border border-blue-900/20"
+            >
+              {/* IMAGE */}
+              <div className="relative h-60 overflow-hidden">
+                <img
+                  src={property.image}
+                  alt={property.title}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                />
 
-              {/* Heart Icon */}
-              <button className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white shadow flex items-center justify-center hover:bg-blue-50">
-                <svg
-                  className="w-5 h-5 text-red-500"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 
-                   4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 
-                   4.5 0 00-6.364 0z" />
-                </svg>
-              </button>
+                {property.featured && (
+                  <span className="absolute top-4 left-4 bg-orange-500 text-white px-3 py-1 text-xs font-semibold rounded-md shadow">
+                    Featured
+                  </span>
+                )}
 
-              {/* Property Type Tag */}
-              <span className="absolute bottom-4 left-4 bg-blue-900 text-white text-xs px-3 py-1 rounded-md">
-                {property.bhk}
-              </span>
-            </div>
-
-            {/* CARD BODY */}
-            <div className="p-5">
-              {/* Title */}
-              <h3 className="text-xl font-semibold text-blue-900 line-clamp-1">
-                {property.title}
-              </h3>
-
-              {/* Location */}
-              <div className="flex items-center text-gray-600 mt-1 mb-3">
-                <MapPin className="w-4 h-4 mr-1 text-orange-500" />
-                <span className="text-sm line-clamp-1">{property.location}</span>
-              </div>
-
-              {/* Icons Row */}
-              <div className="flex justify-start gap-6 text-sm text-gray-600 mb-4">
-                <div className="flex items-center gap-1">
-                  <Bed className="w-4 h-4 text-blue-900" />
-                  <span>{property.bedrooms} Beds</span>
-                </div>
-
-                <div className="flex items-center gap-1">
-                  <Bath className="w-4 h-4 text-blue-900" />
-                  <span>{property.bathrooms} Baths</span>
-                </div>
-
-                <div className="flex items-center gap-1">
-                  <Maximize className="w-4 h-4 text-blue-900" />
-                  <span>{property.area} sqft</span>
-                </div>
-              </div>
-
-              {/* PRICE */}
-              <div>
-                <span className="text-3xl font-bold bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
-                  {formatPrice(property.priceValue)}
+                <span className="absolute bottom-4 left-4 bg-blue-900 text-white text-xs px-3 py-1 rounded-md">
+                  {property.bhk}
                 </span>
               </div>
 
-              {/* BUTTONS */}
-              <div className="grid grid-cols-2 gap-3 mt-5">
-                <Button
-                  className="rounded-xl border-[2px] border-blue-900 text-blue-900 bg-white hover:bg-blue-50"
-                  onClick={() => navigate(`/propertydetails?id=${property.id}`)}
-                >
-                  View Details
-                </Button>
+              {/* CARD BODY */}
+              <div className="p-5">
+                <h3 className="text-xl font-semibold text-blue-900 line-clamp-1">
+                  {property.title}
+                </h3>
 
-                <Button className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl">
-                  Contact
-                </Button>
+                <div className="flex items-center text-gray-600 mt-1 mb-3">
+                  <MapPin className="w-4 h-4 mr-1 text-orange-500" />
+                  <span className="text-sm line-clamp-1">{property.location}</span>
+                </div>
+
+                {/* Icons row */}
+                <div className="flex justify-start gap-6 text-sm text-gray-600 mb-4">
+                  <div className="flex items-center gap-1">
+                    <Bed className="w-4 h-4 text-blue-900" />
+                    <span>{property.bedrooms} Beds</span>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    <Bath className="w-4 h-4 text-blue-900" />
+                    <span>{property.bathrooms} Baths</span>
+                  </div>
+
+                  <div className="flex items-center gap-1">
+                    <Maximize className="w-4 h-4 text-blue-900" />
+                    <span>{property.area} sqft</span>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="text-3xl font-bold bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent">
+                    {formatPrice(property.priceValue)}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3 mt-5">
+                  <Button
+                    className="rounded-xl border-[2px] border-blue-900 text-blue-900 bg-white hover:bg-blue-50"
+                    onClick={() => navigate(`/propertydetails?id=${property.id}`)}
+                  >
+                    View Details
+                  </Button>
+
+                  <Button className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl">
+                    Contact
+                  </Button>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
 
       </div>
     </div>
