@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import GharDekhoLogo from "../assets/Images/GharDekho-BG.png";
+
+
+
 
 export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
   const [formData, setFormData] = useState({
@@ -45,7 +47,7 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
         {/* Logo */}
         <div className="text-center mb-6">
           <img
-            src={GharDekhoLogo}
+            src={""}
             alt="logo"
             className="w-20 h-20 mx-auto rounded-full border border-blue-900/30 shadow-md"
           />
