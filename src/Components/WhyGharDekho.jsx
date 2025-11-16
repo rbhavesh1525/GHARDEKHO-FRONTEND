@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { User, Building2, Heart, Award } from "lucide-react";
 import { TestimonialsSection } from "./CompIndex";
 import { MostVisitedProperties } from "@/Pages/PageIndex";
-import image from "../assets/Images/GharDekho-BG.png"
+import image from "../assets/Images/GharDekho-BG.png";
 
 export default function WhyGharDekho() {
   // STATIC VALUES – YOU CAN CHANGE THEM

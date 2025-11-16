@@ -1,6 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
-import GharDekhoLogo from "../assets/Images/GharDekho-BG.png";
+
 
 export default function LoginModal({ open, onClose, onOpenSignup }) {
   if (!open) return null;
@@ -22,7 +22,7 @@ export default function LoginModal({ open, onClose, onOpenSignup }) {
         {/* Logo */}
         <div className="text-center mb-6">
           <img
-            src={GharDekhoLogo}
+            src={""}
             alt="Ghar Dekho"
             className="w-20 h-20 rounded-full mx-auto shadow-md border border-blue-900/20"
           />
