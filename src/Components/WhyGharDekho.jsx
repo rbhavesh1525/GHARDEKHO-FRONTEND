@@ -5,6 +5,7 @@ import { TestimonialsSection } from "./CompIndex";
 import { MostVisitedProperties } from "@/Pages/PageIndex";
 import image from "../assets/Images/GharDekho-BG.png";
 
+
 export default function WhyGharDekho() {
   // STATIC VALUES – YOU CAN CHANGE THEM
   const counts = {
