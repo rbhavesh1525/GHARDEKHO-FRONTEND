@@ -8,10 +8,10 @@ import {
   AlertCircle,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/Components/ui/button";
+import { Card, CardContent } from "@/Components/ui/card";
+import { Badge } from "@/Components/ui/badge";
+import { Skeleton } from "@/Components/ui/skeleton";
 import {
   AlertDialog,
   AlertDialogAction,

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { HelpCircle, Search, ChevronDown, MessageCircle, Mail, Phone } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/Components/ui/card";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const faqs = [

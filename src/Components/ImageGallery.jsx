@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 
 export default function ImageGallery({ images }) {
   const [selectedIndex, setSelectedIndex] = useState(0);

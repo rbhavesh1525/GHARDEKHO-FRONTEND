@@ -1,6 +1,6 @@
 import React from "react";
 import { X, MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 
 export default function ChatModal({ open, onClose, property, onSend }) {
   if (!open) return null;

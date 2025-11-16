@@ -7,10 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/Components/ui/button";
 import { Eye, Trash2, XCircle, CheckCircle } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/Components/ui/skeleton";
 
 // Import dummy data
 import { adminProperties } from "../DummyData/adminProperties";

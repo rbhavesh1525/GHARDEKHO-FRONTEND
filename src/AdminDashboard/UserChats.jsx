@@ -1,6 +1,6 @@
 import React from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/Components/ui/skeleton";
+import { Badge } from "@/Components/ui/badge";
 import { adminChats } from "../DummyData/adminChats";
 
 export default function UserChats({ data = [], loading = false }) {

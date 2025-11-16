@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Users, Award, Heart, Target, Zap } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/Components/ui/card";
 
 export default function AboutUs() {
   const values = [

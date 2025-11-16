@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { mostVisitedProperties } from "../DummyData/MostVisitedProperties";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { motion } from "framer-motion";
 import { MapPin, Bed, Bath, Maximize } from "lucide-react";
 import { useNavigate } from "react-router-dom";

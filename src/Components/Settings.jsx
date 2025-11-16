@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Settings as SettingsIcon, Bell, Lock, Globe, Palette } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/Components/ui/card";
+import { Switch } from "@/Components/ui/switch";
+import { Label } from "@/Components/ui/label";
 
 export default function Settings() {
   return (

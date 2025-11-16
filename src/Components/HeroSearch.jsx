@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Search, MapPin, Building2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/Components/ui/button";
 import { motion } from "framer-motion";
 import bgimage from "../assets/Images/GharDekho-BG.png";
 

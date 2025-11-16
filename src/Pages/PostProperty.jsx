@@ -3,10 +3,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Home, Upload, ArrowLeft, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Button } from "@/Components/ui/button";
+import { Input } from "@/Components/ui/input";
+import { Textarea } from "@/Components/ui/textarea";
+import { Label } from "@/Components/ui/label";
 import {
   Select,
   SelectContent,
