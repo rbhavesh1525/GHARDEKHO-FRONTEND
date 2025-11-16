@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { propertyListings } from "../DummyData/PropertyListing";
-import PropertyFilterSidebar from "../Components/PropertyFilterSideBar";
+import PropertyFilterSidebar from "../Components/PropertyFilterSidebar";
 import TopNavBar from "../Components/TopNavbar";
 
 function PropertyListingPage() {
@@ -36,7 +36,7 @@ function PropertyListingPage() {
 
       <div className="min-h-screen flex bg-gray-50 mt-20">
         
-        {/* LEFT SIDEBAR */}
+       
         <PropertyFilterSidebar
           selectedType={selectedType}
           setSelectedType={setSelectedType}
