@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import bgimage from "../assets/Images/GharDekho-BG.png";
 
+
 export default function HeroSection() {
   const [searchData, setSearchData] = useState({
     city: "",
