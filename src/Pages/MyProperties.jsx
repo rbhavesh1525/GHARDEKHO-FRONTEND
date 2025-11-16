@@ -21,7 +21,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/Components/ui/alert-dialog";
 
 import { useNavigate } from "react-router-dom";
 
