@@ -1,5 +1,5 @@
 import TopNavbar from "./TopNavbar";
-import PropertyFilterSidebar from "./PropertyFilterSideBar";
+import PropertyFilterSidebar from "./PropertyFilterSidebar";
 import AboutUs from "./AboutUs";
 import Help from "./Help";
 import Settings from "./Settings";
