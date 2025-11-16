@@ -1,5 +1,4 @@
 import React from "react";
-import GharDekhoBg from "../assets/Images/GharDekho-Bg.png";
 import BrowseProperty from "./PropertyCategories";
 import { HeroSearch } from "@/Components/CompIndex";
 

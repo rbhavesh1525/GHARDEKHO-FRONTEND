@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import GharDekhoLogo from "../assets/Images/GharDekho-Bg.png";
+import GharDekhoLogo from "../assets/Images/GharDekho-BG.png";
 
 export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
   const [formData, setFormData] = useState({
