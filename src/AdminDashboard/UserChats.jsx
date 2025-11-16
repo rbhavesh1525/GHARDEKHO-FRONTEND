@@ -1,20 +1,23 @@
 import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { adminChats } from "../DummyData/adminChats";
 
 export default function UserChats({ data = [], loading = false }) {
+
+  // Use dummy data if no data passed
+  const chats = data.length > 0 ? data : adminChats;
+
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-900/10">
 
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-3xl font-bold text-blue-900">All User Chats</h2>
         <span className="text-sm bg-orange-100 text-orange-700 px-3 py-1 rounded-full font-medium shadow-sm">
-          Total: {data.length}
+          Total: {chats.length}
         </span>
       </div>
 
-      {/* Loading Skeleton */}
       {loading ? (
         <div className="space-y-4">
           {[1, 2, 3].map((n) => (
@@ -23,12 +26,11 @@ export default function UserChats({ data = [], loading = false }) {
         </div>
       ) : (
         <div className="space-y-5">
-          {data.map((chat, i) => (
+          {chats.map((chat, i) => (
             <div
               key={i}
               className="p-6 border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-blue-900/30 bg-white transition"
             >
-              {/* Chat Title */}
               <div className="flex justify-between items-center mb-3">
                 <h3 className="text-lg font-semibold text-slate-800">
                   {chat.property_title}
@@ -39,7 +41,6 @@ export default function UserChats({ data = [], loading = false }) {
                 </Badge>
               </div>
 
-              {/* Participants */}
               <div className="text-sm text-slate-600 mb-3">
                 Between:
                 <span className="font-medium text-blue-900"> {chat.sender_email}</span>
@@ -47,7 +48,6 @@ export default function UserChats({ data = [], loading = false }) {
                 <span className="font-medium text-blue-900">{chat.receiver_email}</span>
               </div>
 
-              {/* Messages Preview */}
               <div className="mt-3 space-y-2 pl-4 border-l-4 border-blue-900/20">
                 {chat.messages.slice(0, 2).map((m, index) => (
                   <p

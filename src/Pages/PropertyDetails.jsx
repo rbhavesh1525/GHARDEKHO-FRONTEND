@@ -63,7 +63,7 @@ export default function PropertyDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-7">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
         
         {/* Back Button */}
@@ -178,48 +178,38 @@ export default function PropertyDetail() {
               </div>
               <p className="text-slate-600 mb-6">Total Price</p>
 
-              {/* Owner Info */}
-              <h3 className="font-bold text-slate-900 mb-4">Contact Owner</h3>
+             {/* Owner Info */}
+<h3 className="font-bold text-slate-900 mb-4">Contact Owner</h3>
 
-              <div className="space-y-3">
-                <div className="flex gap-3 text-slate-700">
-                  <User className="w-5 h-5" />
-                  {property.owner_name}
-                </div>
-                <div className="flex gap-3 text-slate-700">
-                  <Phone className="w-5 h-5" />
-                  {property.owner_contact}
-                </div>
-                {property.owner_email && (
-                  <div className="flex gap-3 text-slate-700">
-                    <Mail className="w-5 h-5" />
-                    {property.owner_email}
-                  </div>
-                )}
-              </div>
+<div className="space-y-3">
+  <div className="flex gap-3 text-slate-700">
+    <User className="w-5 h-5" />
+    {property.owner_name}
+  </div>
 
-              {/* Buttons */}
-              <div className="space-y-3 mt-6">
-                <Button
-                  className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl w-full"
-                  onClick={() => {
-                    setSelectedProperty(property);
-                    setShowChatModal(true);
-                  }}
-                >
-                  <MessageCircle className="w-5 h-5 mr-2" />
-                  Contact
-                </Button>
+  {/* Email (optional) */}
+  {property.owner_email && (
+    <div className="flex gap-3 text-slate-700">
+      <Mail className="w-5 h-5" />
+      {property.owner_email}
+    </div>
+  )}
+</div>
 
-                <Button
-                  variant="outline"
-                  className="w-full h-12 rounded-xl border-blue-900 text-blue-900 hover:bg-blue-50"
-                  onClick={() => window.open(`tel:${property.owner_contact}`)}
-                >
-                  <Phone className="w-5 h-5 mr-2" />
-                  Call Owner
-                </Button>
-              </div>
+{/* Chat Button Only */}
+<div className="space-y-3 mt-6">
+  <Button
+    className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl w-full"
+    onClick={() => {
+      setSelectedProperty(property);
+      setShowChatModal(true);
+    }}
+  >
+    <MessageCircle className="w-5 h-5 mr-2" />
+    Chat with Owner
+  </Button>
+</div>
+
 
             </motion.div>
           </div>

@@ -107,7 +107,7 @@ export default function TopNavBar() {
                 </Link>
 
                 <button
-                  onClick={() => navigate("/home")}
+                  onClick={() => navigate("/")}
                   className="block w-full text-left px-4 py-2 hover:bg-red-50 cursor-pointer text-red-600"
                 >
                   Logout

@@ -23,7 +23,7 @@ export default function AdminDashboard() {
       <div className="w-full p-10 bg-[#f7f9fc] min-h-screen">
 
         {/* TAB BUTTONS */}
-        <div className="flex gap-4 mb-10">
+        <div className="flex gap-4 mb-10 justify-center">
           {tabs.map((tab) => (
             <button
               key={tab.id}

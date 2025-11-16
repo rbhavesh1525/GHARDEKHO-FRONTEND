@@ -12,7 +12,14 @@ import { Button } from "@/components/ui/button";
 import { Eye, Trash2, XCircle, CheckCircle } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function TotalProperties({ data = [], loading = false }) {
+// Import dummy data
+import { adminProperties } from "../DummyData/adminProperties";
+
+export default function TotalProperties({ data, loading = false }) {
+
+  // If no data passed → use dummy admin properties
+  const properties = data && data.length > 0 ? data : adminProperties;
+
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-900/10">
 
@@ -40,11 +47,12 @@ export default function TotalProperties({ data = [], loading = false }) {
           </TableHeader>
 
           <TableBody>
-            {data.map((p) => (
+            {properties.map((p) => (
               <TableRow
                 key={p.id}
                 className="hover:bg-blue-900/5 transition-all cursor-pointer"
               >
+
                 {/* Property Column */}
                 <TableCell>
                   <div className="flex items-center gap-4">

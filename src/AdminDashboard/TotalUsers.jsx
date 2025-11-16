@@ -2,7 +2,13 @@ import React from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 
+import { adminUsers } from "../DummyData/adminUsers";
+
 export default function TotalUsers({ data = [], loading = false }) {
+
+  // If no data is passed → use dummy data
+  const users = data.length > 0 ? data : adminUsers;
+
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-900/10 overflow-x-auto">
 
@@ -28,17 +34,19 @@ export default function TotalUsers({ data = [], loading = false }) {
           </thead>
 
           <tbody>
-            {data.map((u) => (
+            {users.map((u) => (
               <tr
                 key={u.id}
                 className="border-b border-gray-200 hover:bg-blue-900/5 transition"
               >
-                {/* User Name + Avatar */}
+                {/* User + Avatar */}
                 <td className="flex items-center gap-3 px-4 py-4">
                   <div className="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center text-white font-semibold shadow">
                     {u.full_name[0]?.toUpperCase()}
                   </div>
-                  <span className="font-medium text-slate-800">{u.full_name}</span>
+                  <span className="font-medium text-slate-800">
+                    {u.full_name}
+                  </span>
                 </td>
 
                 {/* Email */}
