@@ -1,6 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
-import GharDekhoLogo from "../assets/Images/GharDekho-Bg.png";
+import GharDekhoLogo from "../assets/Images/GharDekho-BG.png";
 
 export default function LoginModal({ open, onClose, onOpenSignup }) {
   if (!open) return null;
