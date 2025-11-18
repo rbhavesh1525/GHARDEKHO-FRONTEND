@@ -1,60 +1,97 @@
-import React, { useState } from "react";
-import { Building2, Users, MessageCircle } from "lucide-react";
-import TotalProperties from "./TotalProperties";
-import TotalUsers from "./TotalUsers";
-import UserChats from "./UserChats";
-import AdminTabs from "./AdminTabs";
+import React from "react";
+import { TrendingUp, Eye, Home, MessageSquare, BarChart3 } from "lucide-react";
 import AdminNavbar from "./AdminNavbar";
+import AdminSidebar from "./AdminSidebar";
+import { SemiCircleProgress } from "@/Components/CompIndex";
 
 export default function AdminDashboard() {
-  const [activeTab, setActiveTab] = useState("properties");
-
-  const tabs = [
-    { id: "properties", label: "Properties", icon: Building2 },
-    { id: "users", label: "Users", icon: Users },
-    { id: "chats", label: "Chats", icon: MessageCircle },
-  ];
+  const today = new Date().toLocaleDateString("en-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
   return (
     <>
       <AdminNavbar />
-      <AdminTabs />
+      <AdminSidebar />
 
-      <div className="w-full p-10 bg-[#f7f9fc] min-h-screen">
+      {/* MAIN CONTENT AREA */}
+      <div
+        className="
+          ml-[260px]
+          pt-[90px]
+          px-10 pb-10 
+          bg-[#f7f9fc]
+          min-h-screen
+        "
+      >
+        {/* METRICS SECTION */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
-        {/* TAB BUTTONS */}
-        <div className="flex gap-4 mb-10 justify-center">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`
-                flex items-center gap-2 px-6 py-3 rounded-xl font-medium 
-                border transition-all duration-200 shadow-sm
-                ${
-                  activeTab === tab.id
-                    ? "bg-[#0A1E5E] text-white border-[#0A1E5E] shadow-lg scale-[1.03]"
-                    : "bg-white text-slate-700 border-slate-300 hover:bg-slate-100 hover:shadow-md"
-                }
-              `}
-            >
-              <tab.icon
-                className={`w-4 h-4 ${
-                  activeTab === tab.id ? "text-white" : "text-slate-700"
-                }`}
-              />
-              {tab.label}
-            </button>
-          ))}
-        </div>
+          {/* LEFT — BIG SEMI CIRCLE CARD */}
+          <div className="bg-white border shadow rounded-3xl p-5 flex flex-col justify-start items-center h-[220px]">
 
-        {/* RENDER SELECTED COMPONENT */}
-        <div className="mt-4">
-          {activeTab === "properties" && <TotalProperties />}
-          {activeTab === "users" && <TotalUsers />}
-          {activeTab === "chats" && <UserChats />}
+            <SemiCircleProgress value={70} size={150} /> 
+
+            <p className="text-2xl font-bold text-orange-500 mt-1">2056</p>
+            <p className="text-gray-600 text-xs -mt-1">Properties</p>
+          </div>
+
+          {/* RIGHT — CARDS */}
+          <div className="lg:col-span-2 grid grid-cols-2 md:grid-cols-3 gap-4">
+
+            {/* CARD */}
+            <MetricCard 
+              icon={<Eye className="text-orange-500 w-5 h-5" />} 
+              title="Total Views" 
+              value="201" 
+            />
+
+            <MetricCard 
+              icon={<Home className="text-orange-500 w-5 h-5" />} 
+              title="Total Properties" 
+              value="2056" 
+            />
+
+            <MetricCard 
+              icon={<MessageSquare className="text-orange-500 w-5 h-5" />} 
+              title="Total Inquiry" 
+              value="256" 
+            />
+
+            <MetricCard 
+              icon={<TrendingUp className="text-orange-500 w-5 h-5" />} 
+              title="Total Searches" 
+              value="256" 
+            />
+
+            <MetricCard 
+              icon={<Home className="text-orange-500 w-5 h-5" />} 
+              title="Active Listings" 
+              value="2056" 
+            />
+
+            <MetricCard 
+              icon={<BarChart3 className="text-orange-500 w-5 h-5" />} 
+              title="Growth Rate" 
+              value="+12%" 
+            />
+
+          </div>
         </div>
       </div>
     </>
+  );
+}
+
+/* Reusable small card component */
+function MetricCard({ icon, title, value }) {
+  return (
+    <div className="bg-white rounded-xl shadow border p-4 flex flex-col gap-1 min-h-[100px]">
+      {icon}
+      <p className="text-gray-500 text-xs">{title}</p>
+      <p className="font-bold text-lg text-orange-500">{value}</p>
+    </div>
   );
 }
