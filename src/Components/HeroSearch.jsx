@@ -3,9 +3,7 @@ import { Search, MapPin, Building2, Home, IndianRupee } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/Components/ui/button";
 
-import Ad1 from "../assets/Images/GharDekho-BG.png";
-import Ad2 from "../assets/Images/GharDekho-BG.png"; 
-import Ad3 from "../assets/Images/GharDekho-BG.png";
+
 import LandingPageAdd from "../Pages/LandingPageAdd";
 
 export default function HeroSection() {
@@ -20,15 +18,10 @@ export default function HeroSection() {
   });
 
   // ---- Advertisement Carousel ----
-  const ads = [Ad1, Ad2, Ad3];
-  const [currentAd, setCurrentAd] = useState(0);
+ 
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAd((prev) => (prev + 1) % ads.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+
+ 
 
   const handleSearch = () => {
     console.log(searchData);

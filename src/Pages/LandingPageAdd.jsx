@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import add1 from "../assets/Images/add1.png";
+import add2 from "../assets/Images/add2.png";
+import add3 from "../assets/Images/add3.png";
+
 
 export default function LandingPageAdd() {
   const ads = [
@@ -9,11 +12,11 @@ export default function LandingPageAdd() {
       link: "https://google.com",
     },
     {
-      img: "https://via.placeholder.com/400x220",
+      img: add2,
       link: "https://facebook.com",
     },
     {
-      img: "https://via.placeholder.com/400x220",
+      img: add3,
       link: "https://twitter.com",
     },
   ];
@@ -53,7 +56,7 @@ export default function LandingPageAdd() {
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -40 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           <img
             src={ads[index].img}

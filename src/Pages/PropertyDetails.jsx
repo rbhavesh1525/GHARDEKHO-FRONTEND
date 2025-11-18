@@ -3,15 +3,22 @@ import { motion } from "framer-motion";
 import {
   ArrowLeft,
   MapPin,
-  Bed,
-  Bath,
-  Maximize,
   Heart,
   Share2,
   MessageCircle,
-  Phone,
   Mail,
   User,
+} from "lucide-react";
+
+import {
+  Warehouse,
+  Ruler,
+  Droplet,
+  Zap,
+  Flame,
+  Construction,
+  ParkingCircle,
+  Cctv,
 } from "lucide-react";
 
 import { Button } from "@/Components/ui/button";
@@ -19,29 +26,22 @@ import { Badge } from "@/Components/ui/badge";
 import { useNavigate } from "react-router-dom";
 
 import ImageGallery from "@/Components/ImageGallery";
-import PropertyMap from "../Components/PropertyMap.jsx";
+import PropertyMap from "@/Components/PropertyMap";
+import ChatModal from "@/Components/ChatModal";
 
-import { mostVisitedProperties } from "../DummyData/MostVisitedProperties";
-import ChatModal from "@/Components/ChatModal.jsx";
+import { PopularPropertyOwnerData } from "../DummyData/PopularOwnerProperties";
 
 export default function PropertyDetail() {
   const navigate = useNavigate();
-
   const [property, setProperty] = useState(null);
   const [showChatModal, setShowChatModal] = useState(false);
 
-  const [selectedProperty, setSelectedProperty] = useState(null);
-
-  // Load property from dummy data using ?id=
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const propertyId = Number(params.get("id"));
 
-    const selectedProperty = mostVisitedProperties.find(
-      (p) => p.id === propertyId
-    );
-
-    setProperty(selectedProperty || null);
+    const selected = PopularPropertyOwnerData.find((p) => p.id === propertyId);
+    setProperty(selected || null);
   }, []);
 
   const formatPrice = (price) => {
@@ -51,21 +51,12 @@ export default function PropertyDetail() {
     return `₹${price.toLocaleString()}`;
   };
 
-  if (!property) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-3">Property not found</h2>
-          <Button onClick={() => navigate(-1)}>Back</Button>
-        </div>
-      </div>
-    );
-  }
+  if (!property) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white pt-7">
+    <div className="min-h-screen bg-white pt-7">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
-        
+
         {/* Back Button */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -75,7 +66,7 @@ export default function PropertyDetail() {
           <Button
             variant="outline"
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 border-blue-900 text-blue-900 hover:bg-blue-50"
+            className="flex items-center gap-2 border-[#0B2A55] text-[#0B2A55] hover:bg-[#0B2A55]/10"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Listings
@@ -83,148 +74,172 @@ export default function PropertyDetail() {
         </motion.div>
 
         {/* Image Gallery */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-8"
-        >
-          <ImageGallery images={property.images} />
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mb-8">
+          <ImageGallery images={[property.image]} />
         </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            
-            {/* Header Section */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="flex justify-between items-start">
-                <div>
-                  <Badge className="bg-blue-900 text-white">{property.bhk || "Property"}</Badge>
 
-                  <h1 className="text-4xl font-bold text-slate-900 mt-2">
+          {/* LEFT CONTENT */}
+          <div className="lg:col-span-2 space-y-8">
+
+            {/* Header Section */}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+
+              <div className="flex justify-between">
+                <div>
+                  <Badge className="bg-[#0B2A55] text-white">
+                    Industrial Property
+                  </Badge>
+
+                  <h1 className="text-4xl font-bold text-[#0B2A55] mt-2">
                     {property.title}
                   </h1>
 
-                  <div className="flex items-center text-slate-600 mt-2">
-                    <MapPin className="w-5 h-5 mr-2" />
+                  <div className="flex items-center text-slate-700 mt-2">
+                    <MapPin className="w-5 h-5 mr-2 text-[#FF6B1A]" />
                     {property.location}
                   </div>
                 </div>
 
-                {/* Icons */}
+                {/* Action Icons */}
                 <div className="flex gap-3">
-                  <Button size="icon" variant="outline" className="rounded-full border-blue-900">
-                    <Heart className="w-5 h-5 text-red-500" />
+                  <Button size="icon" variant="outline" className="rounded-full border-[#0B2A55]">
+                    <Heart className="w-5 h-5 text-[#FF6B1A]" />
                   </Button>
-                  <Button size="icon" variant="outline" className="rounded-full border-blue-900">
-                    <Share2 className="w-5 h-5" />
+
+                  <Button size="icon" variant="outline" className="rounded-full border-[#0B2A55]">
+                    <Share2 className="w-5 h-5 text-[#0B2A55]" />
                   </Button>
                 </div>
               </div>
 
-              {/* Icons Row */}
-              <div className="flex items-center gap-6 text-lg text-slate-700 mt-5">
+              {/* SIZE + LAND AREA */}
+              <div className="flex flex-col gap-3 text-lg text-[#0B2A55] mt-5">
+
                 <div className="flex items-center gap-2">
-                  <Bed className="w-5 h-5" /> {property.bedrooms} Bedrooms
+                  <Warehouse className="w-5 h-5 text-[#FF6B1A]" />
+                  <strong>Factory Size:</strong> {property.factorySize}
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Bath className="w-5 h-5" /> {property.bathrooms} Bathrooms
+                  <Ruler className="w-5 h-5 text-[#FF6B1A]" />
+                  <strong>Land Area:</strong> {property.landArea}
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <Maximize className="w-5 h-5" /> {property.area} sqft
-                </div>
               </div>
             </motion.div>
 
             {/* Description */}
-            <motion.div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Description</h2>
-              <p className="text-slate-700 leading-relaxed">{property.description}</p>
-            </motion.div>
+            <div className="bg-white border border-[#0B2A55]/20 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-[#0B2A55] mb-4">Property Description</h2>
+              <p className="text-slate-700 leading-relaxed">
+                This industrial property is ideal for manufacturing, warehousing,
+                storage, production units and commercial expansion. Located in a
+                prime industrial belt, the property offers excellent road access,
+                nearby workforce availability and strong infrastructure support.
+              </p>
+            </div>
 
-            {/* Amenities */}
-            <motion.div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Amenities</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                {property.amenities?.map((am, i) => (
-                  <div key={i} className="flex items-center gap-2 text-slate-700">
-                    <div className="w-2 h-2 bg-blue-900 rounded-full" />
-                    {am}
+            {/* Facilities */}
+            <div className="bg-white border border-[#0B2A55]/20 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-[#0B2A55] mb-4">Available Facilities</h2>
+
+              <div className="grid grid-cols-2 gap-4 text-[#0B2A55]">
+
+                {property.facilities.map((f, i) => (
+                  <div key={i} className="flex items-center gap-2">
+
+                    {/* ICON MATCHING AUTOMATICALLY */}
+                    {f.includes("Power") && <Zap className="w-5 h-5 text-[#FF6B1A]" />}
+                    {f.includes("Water") && <Droplet className="w-5 h-5 text-[#FF6B1A]" />}
+                    {f.includes("Crane") && <Construction className="w-5 h-5 text-[#FF6B1A]" />}
+                    {f.includes("Parking") && <ParkingCircle className="w-5 h-5 text-[#FF6B1A]" />}
+                    {f.includes("Fire") && <Flame className="w-5 h-5 text-[#FF6B1A]" />}
+                    {f.includes("CCTV") && <Cctv className="w-5 h-5 text-[#FF6B1A]" />}
+
+                    <span>{f}</span>
                   </div>
                 ))}
-              </div>
-            </motion.div>
 
-            {/* Location Map */}
-            <motion.div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h2 className="text-2xl font-bold mb-4">Location</h2>
-              <PropertyMap
-                location={property.location}
-                city={property.city || property.location}
-              />
-            </motion.div>
+              </div>
+            </div>
+
+            {/* Nearby */}
+
+            <div className="bg-white border border-[#0B2A55]/20 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-[#0B2A55] mb-4">Nearby Infrastructure</h2>
+              <ul className="space-y-3 text-[#0B2A55]">
+                <li>✔ Close to Highway</li>
+                <li>✔ Good Approach Road</li>
+                <li>✔ Industrial Zone Nearby</li>
+                <li>✔ Labour Market Nearby</li>
+                <li>✔ Shops & Transport Accessible</li>
+              </ul>
+            </div>
+
+            {/* Security */}
+            <div className="bg-white border border-[#0B2A55]/20 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-[#0B2A55] mb-4">Security & Compliance</h2>
+              <ul className="space-y-3 text-[#0B2A55]">
+                <li>✔ CCTV Surveillance</li>
+                <li>✔ Fire Safety Equipment</li>
+                <li>✔ Clear Documentation</li>
+                <li>✔ Industrial Approved Zone</li>
+              </ul>
+            </div>
+
+            {/* Map */}
+            <div className="bg-white border border-[#0B2A55]/20 rounded-2xl p-8 shadow-md">
+              <h2 className="text-2xl font-bold text-[#0B2A55] mb-4">Location</h2>
+              <PropertyMap location={property.location} />
+            </div>
 
           </div>
 
-          {/* Sidebar */}
+          {/* SIDEBAR */}
           <div>
-            <motion.div className="bg-white rounded-2xl p-8 shadow-lg sticky top-24">
-              
-              <div className="text-4xl font-bold bg-gradient-to-r from-blue-900 to-blue-700 bg-clip-text text-transparent mb-2">
+            <div className="bg-white rounded-2xl p-8 shadow-md border border-[#0B2A55]/20 sticky top-24">
+
+              <div className="text-4xl font-bold text-[#0B2A55] mb-2">
                 {formatPrice(property.priceValue)}
               </div>
+
               <p className="text-slate-600 mb-6">Total Price</p>
 
-             {/* Owner Info */}
-<h3 className="font-bold text-slate-900 mb-4">Contact Owner</h3>
+              <h3 className="font-bold text-[#0B2A55] mb-4">Contact Owner</h3>
 
-<div className="space-y-3">
-  <div className="flex gap-3 text-slate-700">
-    <User className="w-5 h-5" />
-    {property.owner_name}
-  </div>
+              <div className="space-y-3 text-[#0B2A55]">
+                <div className="flex gap-3">
+                  <User className="w-5 h-5" />
+                  {property.owner_name}
+                </div>
 
-  {/* Email (optional) */}
-  {property.owner_email && (
-    <div className="flex gap-3 text-slate-700">
-      <Mail className="w-5 h-5" />
-      {property.owner_email}
-    </div>
-  )}
-</div>
+                {property.owner_email && (
+                  <div className="flex gap-3">
+                    <Mail className="w-5 h-5" />
+                    {property.owner_email}
+                  </div>
+                )}
+              </div>
 
-{/* Chat Button Only */}
-<div className="space-y-3 mt-6">
-  <Button
-    className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl w-full"
-    onClick={() => {
-      setSelectedProperty(property);
-      setShowChatModal(true);
-    }}
-  >
-    <MessageCircle className="w-5 h-5 mr-2" />
-    Chat with Owner
-  </Button>
-</div>
+              <Button
+                className="bg-[#FF6B1A] hover:bg-[#e55f15] text-white rounded-xl w-full mt-6"
+                onClick={() => setShowChatModal(true)}
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Chat with Owner
+              </Button>
 
-
-            </motion.div>
+            </div>
           </div>
-
         </div>
       </div>
 
-      {/* Chat Modal */}
       <ChatModal
         open={showChatModal}
         onClose={() => setShowChatModal(false)}
-        property={selectedProperty}
-        onSend={(message) => {
-          console.log("MESSAGE SENT:", message);
-        }}
+        property={property}
       />
     </div>
   );

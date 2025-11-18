@@ -1,7 +1,8 @@
 import './App.css'
 import {
   HomePage, PropertyListingPage, Notifications, MyProperties,
-  PostProperty, MyProfile, ChatPage, Login, Signup, OTPVerification,PropertyDetail
+  PostProperty, MyProfile, ChatPage, Login, Signup, OTPVerification,PropertyDetail,PopularOwnerProperties,Projects,
+  MostVisitedProperties
 } from './Pages/PageIndex';
 
 import {
@@ -40,7 +41,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/Home" replace />} />
         <Route path="/Home" element={<HomePage />} />
-        <Route path="/Properties/:type" element={<PropertyListingPage />} />
+        <Route path="/allProperties" element={<PropertyListingPage />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/Help" element={<Help />} />
         <Route path="/Settings" element={<Settings />} />
@@ -51,6 +52,7 @@ function App() {
         <Route path="/Testimonials" element={<TestimonialsSection />} />
         <Route path="/Chat" element={<ChatPage />} />
         <Route path="/propertydetails" element={<PropertyDetail />} />
+        <Route path='/Projects' element={<><Projects/> </>}/>
 
         {/*  admin side*/}
         <Route path="/adminhome"  element={<AdminDashboard />} />

@@ -13,4 +13,9 @@ import Profile from "./Profile";
 import ChatPage from "./ChatPage";
 import MostVisitedProperties from "./MostVisitedProperties";
 import PropertyDetail from "./PropertyDetails"; 
-export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile,ChatPage,OTPVerification,MostVisitedProperties,PropertyDetail };
+import PopularOwnerProperties from "./PopularOwnerProperties";
+import Projects from "./Projects";
+export { HomePage, Login, Signup, BrowseProperty,PropertyListingPage,Notifications,MyProperties,PostProperty,Profile,MyProfile,ChatPage,OTPVerification,MostVisitedProperties,PropertyDetail,Projects };
+
+export {PopularOwnerProperties}
+

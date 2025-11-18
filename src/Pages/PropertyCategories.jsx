@@ -5,7 +5,8 @@ import category1 from "../assets/Images/category1.jpg";
 import category2 from "../assets/Images/category2.jpg"
 import category3 from "../assets/Images/category3.jpg"
 import category4 from "../assets/Images/category4.jpg"
-
+import { PopularOwnerProperties } from "./PageIndex";
+import { MostVisitedProperties } from "./PageIndex";
 export default function PropertyCategories() {
   const data = [
     {
@@ -35,6 +36,7 @@ export default function PropertyCategories() {
   ];
 
   return (
+    <>
     <section className="w-full py-16">
       <div className="max-w-7xl mx-auto px-6">
 
@@ -94,5 +96,8 @@ export default function PropertyCategories() {
         </div>
       </div>
     </section>
+    <PopularOwnerProperties/>
+    <MostVisitedProperties/>
+    </>
   );
 }
