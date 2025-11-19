@@ -33,19 +33,41 @@ export default function TopNavBar() {
 
         {/* Navigation */}
         <nav className="hidden lg:flex items-center space-x-10">
-          <Link className="text-[16px] hover:text-blue-900 cursor-pointer" to="/home">
-            Home
-          </Link>
-          <Link className="text-[16px] hover:text-blue-900 cursor-pointer" to="/AboutUs">
-            About Us
-          </Link>
-          <Link className="text-[16px] hover:text-blue-900 cursor-pointer" to="/Help">
-            Help
-          </Link>
-          <Link className="text-[16px] hover:text-blue-900 cursor-pointer" to="/chat">
-            Chats
-          </Link>
-        </nav>
+
+  <Link
+    to="/home"
+    className="relative group text-[16px] cursor-pointer text-blue-900 font-medium"
+  >
+    Home
+    <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-orange-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
+  </Link>
+
+  <Link
+    to="/AboutUs"
+    className="relative group text-[16px] cursor-pointer text-blue-900 font-medium"
+  >
+    About Us
+    <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-orange-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
+  </Link>
+
+  <Link
+    to="/Help"
+    className="relative group text-[16px] cursor-pointer text-blue-900 font-medium"
+  >
+    Help
+    <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-orange-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
+  </Link>
+
+  <Link
+    to="/chat"
+    className="relative group text-[16px] cursor-pointer text-blue-900 font-medium"
+  >
+    Chats
+    <span className="absolute left-0 -bottom-1 h-[3px] w-0 bg-orange-500 rounded-full transition-all duration-500 group-hover:w-full"></span>
+  </Link>
+
+</nav>
+
 
         {/* Right Side */}
         <div className="flex items-center space-x-6">
@@ -54,7 +76,7 @@ export default function TopNavBar() {
           <button
             onClick={() => navigate("/postproperty")}
             className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-xl 
-                       font-semibold shadow-md transition-all duration-300 hidden md:block"
+                       font-semibold shadow-md transition-all duration-300 hidden md:block cursor-pointer"
           >
             Upload for FREE
           </button>

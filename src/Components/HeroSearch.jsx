@@ -6,6 +6,8 @@ import { Button } from "@/Components/ui/button";
 
 import LandingPageAdd from "../Pages/LandingPageAdd";
 
+
+
 export default function HeroSection() {
   const tabs = ["Buy", "Rent", "PG","New Projects", "Plot", "Commercial", "Post Free Property Ad"];
   const [activeTab, setActiveTab] = useState("Buy");
@@ -16,6 +18,25 @@ export default function HeroSection() {
     propertyType: "",
     purpose: "",
   });
+
+
+  const [propertyMenu, setPropertyMenu] = useState(false);
+const [budgetMenu, setBudgetMenu] = useState(false);
+
+const propertyTypes = [
+  "Open Spaces",
+  "Buildings",
+  "Residential",
+  "Factories",
+  "Godown",
+];
+
+const budgetOptions = [
+  "₹10k - ₹20k",
+  "₹20k - ₹50k",
+  "₹50k - ₹1L",
+  "₹1L+",
+];
 
   // ---- Advertisement Carousel ----
  
@@ -63,21 +84,40 @@ export default function HeroSection() {
     initial={{ opacity: 0, y: 15 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.8 }}
-    className="flex flex-wrap justify-center lg:justify-start gap-6 mt-6 lg:pl-36"
+    className="flex flex-wrap justify-center lg:justify-start gap-6 mt-6 lg:pl-26"
   >
-    {tabs.map((tab) => (
-      <button
-        key={tab}
-        onClick={() => setActiveTab(tab)}
-        className={`text-[16px] pb-1 border-b-2 transition cursor-pointer ${
-          activeTab === tab
-            ? "text-orange-600 border-orange-500"
-            : "text-gray-700 border-transparent hover:text-blue-900"
-        }`}
-      >
-        {tab}
-      </button>
-    ))}
+  {tabs.map((tab) => (
+  <button
+    key={tab}
+    className="relative group text-[16px] cursor-pointer px-1 font-medium"
+  >
+    {/* Text */}
+    <span
+      className="
+        relative z-10 
+        text-blue-900 
+        transition-all duration-300 
+        group-hover:text-orange-500
+      "
+    >
+      {tab}
+    </span>
+
+    {/* Underline Animation */}
+    <span
+      className="
+        absolute left-0 -bottom-1 
+        h-[3px] rounded-full 
+        bg-orange-500 
+        w-0 
+        transition-all duration-300 
+        group-hover:w-full
+      "
+    ></span>
+  </button>
+))}
+
+
   </motion.div>
 
   {/* SEARCH BAR */}
@@ -113,41 +153,93 @@ export default function HeroSection() {
 
     <div className="hidden md:block w-px h-6 bg-gray-300" />
 
-    {/* Property Type */}
-    <div className="flex items-center gap-2 flex-[1] cursor-pointer">
+    <div className="relative">
+  <div
+    className="flex items-center gap-2 cursor-pointer"
+    onClick={() => setPropertyMenu(!propertyMenu)}
+  >
+    <Home className="text-orange-500 w-5 h-5" />
+    <span>{searchData.propertyType || "Property Type"}</span>
+  </div>
 
-      <Home className="text-orange-500 w-5 h-5" />
-      <select
-        className="bg-transparent outline-none cursor-pointer"
-        value={searchData.propertyType}
-        onChange={(e) => setSearchData({ ...searchData, propertyType: e.target.value })}
-      >
-        <option value="">Property Type</option>
-        <option value="flat">Flat</option>
-        <option value="villa">Villa</option>
-        <option value="bungalow">Bungalow</option>
-      </select>
+  {propertyMenu && (
+    <div className="absolute bg-white border shadow-xl rounded-xl p-4 top-10 left-0 w-72 z-50 cursor-pointer">
+
+      {/* Close Button */}
+      <div className="flex justify-between items-center mb-3">
+        
+        <button className="cursor-pointer" onClick={() => setPropertyMenu(false)}>✕</button>
+      </div>
+
+      {/* Pills */}
+      <div className="grid grid-cols-2 gap-3">
+        {propertyTypes.map((type) => (
+          <button
+            key={type}
+            onClick={() => {
+              setSearchData({ ...searchData, propertyType: type });
+              setPropertyMenu(false);
+            }}
+            className={`px-3 py-2 rounded-xl border transition 
+              ${
+                searchData.propertyType === type
+                  ? "bg-orange-100 border-orange-500 font-semibold"
+                  : "border-gray-300 hover:bg-gray-100"
+              }`}
+          >
+            {type}
+          </button>
+        ))}
+      </div>
+
     </div>
+  )}
+</div>
 
     <div className="hidden md:block w-px h-6 bg-gray-300" />
 
     {/* Budget */}
-  <div className="flex items-center gap-2 flex-[1] cursor-pointer">
+ <div className="relative">
+  <div
+    className="flex items-center gap-2 cursor-pointer"
+    onClick={() => setBudgetMenu(!budgetMenu)}
+  >
+    <IndianRupee className="text-orange-500 w-5 h-5" />
+    <span>{searchData.purpose || "Budget"}</span>
+  </div>
 
-      <IndianRupee className="text-orange-500 w-5 h-5" />
-      <select
-        className="bg-transparent outline-none cursor-pointer"
-        value={searchData.purpose}
-        onChange={(e) =>
-          setSearchData({ ...searchData, purpose: e.target.value })
-        }
-      >
-        <option>Budget</option>
-        <option>₹10k - ₹20k</option>
-        <option>₹20k - ₹50k</option>
-        <option>₹50k+</option>
-      </select>
+  {budgetMenu && (
+    <div className="absolute bg-white border shadow-xl rounded-xl p-4 top-10 left-0 w-72 z-50 cursor-pointer">
+
+      <div className="flex justify-between items-center mb-3 cursor-pointer">
+
+        <button className="cursor-pointer" onClick={() => setBudgetMenu(false)}>✕</button>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        {budgetOptions.map((b) => (
+          <button
+            key={b}
+            onClick={() => {
+              setSearchData({ ...searchData, purpose: b });
+              setBudgetMenu(false);
+            }}
+            className={`px-3 py-2 rounded-xl border transition 
+              ${
+                searchData.purpose === b
+                  ? "bg-orange-100 border-orange-500 font-semibold"
+                  : "border-gray-300 hover:bg-gray-100"
+              }`}
+          >
+            {b}
+          </button>
+        ))}
+      </div>
+
     </div>
+  )}
+</div>
+
 
     {/* SEARCH BUTTON */}
     <Button
@@ -161,8 +253,7 @@ export default function HeroSection() {
 </div>
 
 
-        {/* RIGHT SIDE AD CAROUSEL */}
-       {/* RIGHT SIDE AD CAROUSEL (NOW COMPONENT) */}
+      
 {/* RIGHT SIDE AD CAROUSEL (Render Component Instead of Hardcoded Image) */}
 <motion.div
   initial={{ opacity: 0, x: 40 }}
