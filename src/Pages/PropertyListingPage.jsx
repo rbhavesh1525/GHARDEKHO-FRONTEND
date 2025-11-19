@@ -6,31 +6,54 @@ import TopNavBar from "../Components/TopNavbar";
 import { Button } from "@/Components/ui/button";
 
 function PropertyListingPage() {
-  const { type } = useParams();
   const navigate = useNavigate();
+  const { type } = useParams();
 
-  // Default should be ALL
-  const [selectedType, setSelectedType] = useState("");
+  // DEFAULT FILTERS
+  const [selectedType, setSelectedType] = useState(type || "");
   const [budget, setBudget] = useState("");
-  const [range, setRange] = useState(10);
+  const [minArea, setMinArea] = useState("");
+  const [selectedFacilities, setSelectedFacilities] = useState([]);
 
-  // 🔄 CLEAR ALL FILTERS
-  const clearFilters = () => {
-    setBudget("");
-    setRange(10);
-    setSelectedType("");
+  // ⭐ EXTRACT NUMERIC PRICE FROM RANGE STRING
+  const extractPriceNumber = (range) => {
+    if (!range) return 0;
+
+    const match = range.match(/\d[\d,]*/);
+    return match ? parseInt(match[0].replace(/,/g, "")) : 0;
   };
 
-  // 🧠 PROPERTY FILTER FUNCTION
+  // ⭐ EXTRACT NUMERIC AREA FROM RANGE
+  const extractAreaNumber = (range) => {
+    if (!range) return 0;
+
+    const match = range.match(/\d[\d,]*/);
+    return match ? parseInt(match[0].replace(/,/g, "")) : 0;
+  };
+
+  // ⭐ CLEAR ALL FILTERS
+  const clearFilters = () => {
+    setSelectedType("");
+    setBudget("");
+    setMinArea("");
+    setSelectedFacilities([]);
+  };
+
+  // ⭐ FILTER PROPERTIES
   const filteredProperties = propertyListings.filter((p) => {
     const matchesType = !selectedType || p.type === selectedType;
 
-    const priceNumber = parseInt(p.price.replace(/\D/g, ""));
-    const matchesBudget = !budget || priceNumber <= parseInt(budget);
+    const lowestPrice = extractPriceNumber(p.priceRange);
+    const matchesBudget = !budget || lowestPrice <= parseInt(budget);
 
-    const matchesDistance = parseInt(p.distance) <= range;
+    const lowestArea = extractAreaNumber(p.areaRange);
+    const matchesArea = !minArea || lowestArea >= parseInt(minArea);
 
-    return matchesType && matchesBudget && matchesDistance;
+    const matchesFacilities =
+      selectedFacilities.length === 0 ||
+      selectedFacilities.every((f) => p.facilities.includes(f));
+
+    return matchesType && matchesBudget && matchesArea && matchesFacilities;
   });
 
   return (
@@ -39,32 +62,35 @@ function PropertyListingPage() {
 
       <div className="min-h-screen flex bg-gray-50 mt-17">
 
-        {/* SIDEBAR */}
+        {/* FILTER SIDEBAR */}
         <PropertyFilterSidebar
           selectedType={selectedType}
           setSelectedType={setSelectedType}
           budget={budget}
           setBudget={setBudget}
-          range={range}
-          setRange={setRange}
+          minArea={minArea}
+          setMinArea={setMinArea}
+          selectedFacilities={selectedFacilities}
+          setSelectedFacilities={setSelectedFacilities}
           clearFilters={clearFilters}
         />
 
-        {/* RIGHT CONTENT */}
+        {/* MAIN CONTENT */}
         <main className="flex-1 p-10 overflow-y-auto">
 
-          {/* PAGE HEADING */}
+          {/* PAGE TITLE */}
           <h1 className="text-4xl font-bold text-[#0B2A55] mb-8 text-center">
             {selectedType ? (
-              <span>
-                <span className="text-[#FF6B1A]">{selectedType}</span> Properties
-              </span>
+              <>
+                <span className="text-[#FF6B1A] capitalize">{selectedType}</span>{" "}
+                Properties
+              </>
             ) : (
-              "All Properties"
+              "All Industrial Properties"
             )}
           </h1>
 
-          {/* PROPERTY GRID */}
+          {/* LISTINGS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
             {filteredProperties.length > 0 ? (
@@ -73,6 +99,7 @@ function PropertyListingPage() {
                   key={p.id}
                   className="bg-white rounded-2xl border border-[#0B2A55]/20 shadow-md 
                              hover:shadow-xl transition-all cursor-pointer p-4 flex flex-col"
+                  onClick={() => navigate(`/propertydetails?id=${p.id}`)}
                 >
                   {/* IMAGE */}
                   <div className="h-48 rounded-xl overflow-hidden mb-4">
@@ -88,43 +115,41 @@ function PropertyListingPage() {
                     {p.title}
                   </h2>
 
-                  <p className="text-gray-600 text-sm mt-1">{p.location}</p>
+                  {/* AREA */}
+                  <p className="text-gray-600 text-sm mt-1">
+                    {p.areaRange}
+                  </p>
 
-                  {/* PRICE + AREA */}
-                  <div className="flex justify-between items-center mt-4">
-                    <span className="text-[#0B2A55] font-bold text-lg">
-                      {p.price}
-                    </span>
-
-                    <span className="text-gray-500 text-sm">{p.area}</span>
-                  </div>
-
-                  {/* DISTANCE */}
-                  <p className="text-xs text-gray-500 mt-1 mb-4">
-                    Distance: {p.distance}
+                  {/* PRICE */}
+                  <p className="text-[#0B2A55] font-bold text-lg mt-3">
+                    {p.priceRange}
                   </p>
 
                   {/* BUTTONS */}
-                  <div className="grid grid-cols-2 gap-3 mt-auto pt-2">
+                  <div className="grid grid-cols-2 gap-3 mt-auto pt-3">
                     <Button
                       className="border-[2px] border-[#0B2A55] text-[#0B2A55] 
                                  bg-white hover:bg-[#0B2A55]/10 rounded-xl cursor-pointer"
-                      onClick={() => navigate(`/propertydetails?id=${p.id}`)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/propertydetails?id=${p.id}`);
+                      }}
                     >
                       View Details
                     </Button>
 
                     <Button
-                      className="bg-blue-900 hover:bg-blue-950 text-white  
-                                 rounded-xl cursor-pointer"
+                      className="bg-blue-900 hover:bg-blue-950 text-white rounded-xl cursor-pointer"
+                      onClick={(e) => e.stopPropagation()}
                     >
                       Contact
                     </Button>
                   </div>
+
                 </div>
               ))
             ) : (
-              <p className="text-gray-600 text-lg">No properties found.</p>
+              <p className="text-gray-600 text-lg">No industrial properties found.</p>
             )}
           </div>
         </main>

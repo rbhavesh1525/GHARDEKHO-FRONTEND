@@ -1,79 +1,88 @@
 import React from "react";
-import { Skeleton } from "@/Components/ui/skeleton";
-import { Badge } from "@/Components/ui/badge";
+import {
+  Search,
+  SlidersHorizontal,
+  ArrowDownUp,
+  Users,
+  UserCheck
+} from "lucide-react";
+import TotalUsersList from "./TotalUsersList";
 
-import { adminUsers } from "../DummyData/adminUsers";
-
-export default function TotalUsers({ data = [], loading = false }) {
-
-  // If no data is passed → use dummy data
-  const users = data.length > 0 ? data : adminUsers;
-
+export default function TotalUsersTopBar() {
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-xl border border-blue-900/10 overflow-x-auto">
+    <div className="mb-6 border-amber-700">
 
-      <h2 className="text-3xl font-bold text-blue-900 mb-6">
-        Manage Users
-      </h2>
+      {/* GRID → 2 cards + search area */}
+      <div className="grid grid-cols-[auto_auto_1fr] items-start gap-5">
 
-      {loading ? (
-        <div className="space-y-4">
-          {[1, 2, 3].map((n) => (
-            <Skeleton key={n} className="h-16 w-full rounded-xl" />
-          ))}
+        {/* --- CARD 1: TOTAL USERS --- */}
+        <div className="bg-white shadow-sm border border-blue-900/10 rounded-xl px-5 py-4 min-w-[300px]">
+          <div className="flex items-center gap-2">
+            <Users className="w-5 h-5 text-orange-500" />
+            <p className="text-sm font-semibold text-gray-700">Total Users</p>
+          </div>
+
+          <p className="text-xl font-bold text-orange-500 mt-1">201</p>
+          <p className="text-green-500 text-xs mt-1">
+            +40% compared to last month
+          </p>
         </div>
-      ) : (
-        <table className="w-full text-left">
-          <thead>
-            <tr className="bg-blue-900/10 text-blue-900">
-              <th className="px-4 py-3 font-semibold">User</th>
-              <th className="px-4 py-3 font-semibold">Email</th>
-              <th className="px-4 py-3 font-semibold">Role</th>
-              <th className="px-4 py-3 font-semibold">Joined</th>
-            </tr>
-          </thead>
 
-          <tbody>
-            {users.map((u) => (
-              <tr
-                key={u.id}
-                className="border-b border-gray-200 hover:bg-blue-900/5 transition"
-              >
-                {/* User + Avatar */}
-                <td className="flex items-center gap-3 px-4 py-4">
-                  <div className="w-10 h-10 bg-blue-900 rounded-full flex items-center justify-center text-white font-semibold shadow">
-                    {u.full_name[0]?.toUpperCase()}
-                  </div>
-                  <span className="font-medium text-slate-800">
-                    {u.full_name}
-                  </span>
-                </td>
+        {/* --- CARD 2: ACTIVE USERS --- */}
+        <div className="bg-white shadow-sm border border-blue-900/10 rounded-xl px-5 py-4 min-w-[300px]">
+          <div className="flex items-center gap-2">
+            <UserCheck className="w-5 h-5 text-orange-500" />
+            <p className="text-sm font-semibold text-gray-700">
+              Active Users
+            </p>
+          </div>
 
-                {/* Email */}
-                <td className="px-4 text-slate-700">{u.email}</td>
+          <p className="text-xl font-bold text-orange-500 mt-1">20</p>
+          <p className="text-green-500 text-xs mt-1">
+            +40% compared to last month
+          </p>
+        </div>
 
-                {/* Role Badge */}
-                <td className="px-4">
-                  <Badge
-                    className={`px-3 py-1 text-sm capitalize ${
-                      u.role === "admin"
-                        ? "bg-orange-100 text-orange-700"
-                        : "bg-blue-100 text-blue-800"
-                    }`}
-                  >
-                    {u.role}
-                  </Badge>
-                </td>
+        {/* --- SEARCH + SORT + FILTER --- */}
+        <div className="flex flex-col items-end space-y-3 w-full">
 
-                {/* Join Date */}
-                <td className="px-4 text-slate-600">
-                  {new Date(u.created_date).toLocaleDateString()}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+          {/* SEARCH INPUT ROW */}
+          <div className="w-full max-w-[420px] flex items-center gap-3">
+            <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 flex-1">
+              <Search className="text-gray-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search Users"
+                className="bg-transparent outline-none ml-3 w-full text-sm"
+              />
+            </div>
+
+            <button className="bg-orange-500 hover:bg-orange-600 transition text-white rounded-full p-3 shadow cursor-pointer">
+              <Search className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* BUTTON ROW */}
+          <div className="w-full max-w-[410px] flex items-center gap-3">
+
+            {/* SORT */}
+            <button className="border border-gray-200 text-gray-700 rounded-lg px-4 py-2 bg-white flex items-center gap-2 cursor-pointer">
+              <ArrowDownUp className="w-4 h-4 text-orange-500" />
+              Sort By
+            </button>
+
+            {/* FILTER */}
+            <button className="border border-gray-200 text-gray-700 rounded-lg px-4 py-2 bg-white flex items-center gap-2 cursor-pointer">
+              <SlidersHorizontal className="w-4 h-4 text-orange-500" />
+              Filter
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6">
+        <TotalUsersList />
+      </div>
     </div>
   );
 }

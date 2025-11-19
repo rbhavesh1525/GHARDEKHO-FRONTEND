@@ -1,121 +1,160 @@
-export const propertyListings = [
-  // 🏠 1BHK
+// 📦 Industrial Property Categories (EXTENDED + REALISTIC)
+
+export const propertyListings  = [
   {
     id: 1,
-    type: "1bhk",
-    title: "Cozy 1BHK Apartment in Pune",
-    location: "Koregaon Park, Pune",
-    price: "₹15,000/mo",
-    area: "550 sqft",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=500",
-    distance: "2 km",
+    title: "Factory / Manufacturing Unit",
+    type: "factory",
+    image: "/assets/factory.jpg",
+
+    // CARD INFO
+    priceRange: "₹40,000 – ₹3,50,000 / Month",
+    areaRange: "2,000 – 60,000 sq ft",
+
+    // PROPERTY DETAILS PAGE FIELDS
+    description:
+      "Ideal for manufacturing, production units, assembly lines, fabrication & heavy industries. Includes good connectivity, labour availability and utility infrastructure.",
+
+    specs: {
+      factorySize: "5,000 – 50,000 sq ft",
+      landArea: "8,000 – 1,00,000 sq ft",
+      power: "65 – 200 HP",
+      height: "20 – 40 ft",
+      craneSupport: true,
+      waterAvailability: true,
+    },
+
+    facilities: [
+      "High Power Supply",
+      "24x7 Water",
+      "Fire NOC",
+      "CCTV Surveillance",
+      "Crane Provision",
+      "Parking Space",
+      "Wide Road Access",
+      "Industrial Zone Approved",
+    ],
   },
+
   {
     id: 2,
-    type: "1bhk",
-    title: "Compact 1BHK in Mumbai Suburbs",
-    location: "Bandra East, Mumbai",
-    price: "₹18,000/mo",
-    area: "600 sqft",
-    image:
-      "https://images.unsplash.com/photo-1560185008-b033106af12b?w=500",
-    distance: "4 km",
+    title: "Warehouse / Godown",
+    type: "warehouse",
+    image: "/assets/warehouse.jpg",
+
+    priceRange: "₹25,000 – ₹2,50,000 / Month",
+    areaRange: "1,500 – 80,000 sq ft",
+
+    description:
+      "Best suited for storage, logistics, cold storage, FMCG, stock keeping and distribution hubs. Located near highways for fast transport movement.",
+
+    specs: {
+      factorySize: "8,000 – 60,000 sq ft",
+      landArea: "10,000 – 2,00,000 sq ft",
+      height: "22 – 45 ft",
+      parking: true,
+      waterAvailability: true,
+      ventilation: "Natural + Turbo Fans",
+    },
+
+    facilities: [
+      "RCC Flooring",
+      "CCTV Surveillance",
+      "Dock Leveler",
+      "Heavy Vehicle Access",
+      "Fire Safety",
+      "Loading / Unloading Zone",
+      "24x7 Security",
+    ],
   },
 
-  // 🏢 2BHK
   {
     id: 3,
-    type: "2bhk",
-    title: "Spacious 2BHK Flat in Mumbai",
-    location: "Andheri West, Mumbai",
-    price: "₹25,000/mo",
-    area: "950 sqft",
-    image:
-      "https://images.unsplash.com/photo-1493809842364-78817add7ffb?w=500",
-    distance: "5 km",
+    title: "Open Industrial Land / Plot",
+    type: "open-land",
+    image: "/assets/open_land.jpg",
+
+    priceRange: "₹10 – ₹40 per sq ft (Sale)",
+    areaRange: "5,000 – 5,00,000 sq ft",
+
+    description:
+      "Great for future construction, storage yards, transport hubs, container parking, brick kiln, fabrication yard etc.",
+
+    specs: {
+      landArea: "10,000 – 10,00,000 sq ft",
+      fencing: true,
+      roadAccess: "Main Road Access",
+      waterAvailability: false,
+      electricity: true,
+    },
+
+    facilities: [
+      "Wide Road Approach",
+      "Industrial Zone",
+      "Truck Friendly Area",
+      "Easy Highway Access",
+      "Future Expansion Possible",
+    ],
   },
+
   {
     id: 4,
-    type: "2bhk",
-    title: "Modern 2BHK Apartment in Pune",
-    location: "Wakad, Pune",
-    price: "₹27,000/mo",
-    area: "880 sqft",
-    image:
-      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?w=500",
-    distance: "6 km",
+    title: "Multi-Storey Industrial Building",
+    type: "big-building",
+    image: "/assets/industrial_building.jpg",
+
+    priceRange: "₹60,000 – ₹5,00,000 / Month",
+    areaRange: "10,000 – 1,20,000 sq ft",
+
+    description:
+      "Premium industrial RCC buildings suitable for corporate production, pharmaceuticals, textile units & large-scale industries.",
+
+    specs: {
+      floors: "2 – 4 Floors",
+      floorLoadCapacity: "1 – 3 Ton / sq m",
+      lift: "Goods Lift (2–5 Ton)",
+      power: "100 – 300 HP",
+      securityCabin: true,
+    },
+
+    facilities: [
+      "Fire Compliance Certified",
+      "Goods Lift",
+      "24x7 Water & Power",
+      "Parking",
+      "Security Cabin",
+      "CCTV",
+      "Wide Roads",
+    ],
   },
 
-  // 🏙️ 3BHK
   {
     id: 5,
-    type: "3bhk",
-    title: "3BHK Premium Apartment in Delhi",
-    location: "Dwarka Sector 21, Delhi",
-    price: "₹45,000/mo",
-    area: "1300 sqft",
-    image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=500",
-    distance: "8 km",
-  },
-  {
-    id: 6,
-    type: "3bhk",
-    title: "Luxury 3BHK Flat in Bangalore",
-    location: "Whitefield, Bangalore",
-    price: "₹50,000/mo",
-    area: "1450 sqft",
-    image:
-      "https://images.unsplash.com/photo-1600607687486-6cc04c045447?w=500",
-    distance: "10 km",
-  },
+    title: "Open Industrial Shed",
+    type: "open-shed",
+    image: "/assets/open_shed.jpg",
 
-  // 🏡 BUNGALOW
-  {
-    id: 7,
-    type: "bungalow",
-    title: "Classic Bungalow with Garden in Ahmedabad",
-    location: "Satellite, Ahmedabad",
-    price: "₹75,000/mo",
-    area: "2800 sqft",
-    image:
-      "https://images.unsplash.com/photo-1600585154207-0d9e6e5b17cf?w=500",
-    distance: "7 km",
-  },
-  {
-    id: 8,
-    type: "bungalow",
-    title: "Elegant Bungalow in Chandigarh",
-    location: "Sector 33, Chandigarh",
-    price: "₹85,000/mo",
-    area: "3000 sqft",
-    image:
-      "https://images.unsplash.com/photo-1600585153938-2a9b9e4f1b3d?w=500",
-    distance: "9 km",
-  },
+    priceRange: "₹20,000 – ₹1,20,000 / Month",
+    areaRange: "1,000 – 40,000 sq ft",
 
-  // 🏰 VILLA
-  {
-    id: 9,
-    type: "villa",
-    title: "Luxury Villa in Goa with Private Pool",
-    location: "Candolim, Goa",
-    price: "₹95,000/mo",
-    area: "3200 sqft",
-    image:
-      "https://images.unsplash.com/photo-1613977257363-707ba9348227?w=500",
-    distance: "10 km",
-  },
-  {
-    id: 10,
-    type: "villa",
-    title: "Beachside Villa in Kochi",
-    location: "Cherai Beach, Kochi",
-    price: "₹1,10,000/mo",
-    area: "3500 sqft",
-    image:
-      "https://images.unsplash.com/photo-1600585154356-596af9009f20?w=500",
-    distance: "12 km",
+    description:
+      "Budget-friendly sheds for storage, fabrication, workshop, automobile, godown and small-scale units.",
+
+    specs: {
+      shedSize: "3,000 – 30,000 sq ft",
+      landArea: "4,000 – 50,000 sq ft",
+      height: "18 – 30 ft",
+      flooring: "Industrial Flooring",
+      power: "30 – 80 HP",
+    },
+
+    facilities: [
+      "Wide Road",
+      "Parking",
+      "Water Source",
+      "Electricity",
+      "Natural Ventilation",
+      "Industrial Location",
+    ],
   },
 ];

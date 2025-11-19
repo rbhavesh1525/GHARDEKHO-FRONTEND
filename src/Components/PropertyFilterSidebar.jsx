@@ -1,24 +1,43 @@
 import React from "react";
 
-function PropertyFilterSidebar({
+export default function PropertyFilterSidebar({
   selectedType,
   setSelectedType,
   budget,
   setBudget,
-  range,
-  setRange,
+  minArea,
+  setMinArea,
+  selectedFacilities,
+  setSelectedFacilities,
   clearFilters,
 }) {
+  // Industrial Property Types
   const propertyTypes = [
-    "1rk",
-    "1room",
-    "1bhk",
-    "2bhk",
-    "3bhk",
-    "bungalow",
-    "villa",
-    "independent flat",
+    { label: "Factory", value: "factory" },
+    { label: "Warehouse", value: "warehouse" },
+    { label: "Open Land", value: "open-land" },
+    { label: "Big Building", value: "big-building" },
+    { label: "Open Shed", value: "open-shed" },
   ];
+
+  // Facilities
+  const facilities = [
+    "Power",
+    "Water",
+    "CCTV",
+    "Fire",
+    "Parking",
+    "Crane",
+  ];
+
+  // Toggle Facility Selection
+  const toggleFacility = (f) => {
+    if (selectedFacilities.includes(f)) {
+      setSelectedFacilities(selectedFacilities.filter((x) => x !== f));
+    } else {
+      setSelectedFacilities([...selectedFacilities, f]);
+    }
+  };
 
   return (
     <aside className="w-64 bg-white shadow-xl p-6 border-r border-blue-900/20 h-screen sticky top-16 rounded-r-2xl">
@@ -37,21 +56,21 @@ function PropertyFilterSidebar({
       {/* Property Type */}
       <div className="mb-8">
         <h3 className="text-sm font-semibold text-blue-900 mb-3">
-          Property Type
+          Industrial Property Type
         </h3>
 
         <div className="flex flex-wrap gap-2">
           {propertyTypes.map((type) => (
             <button
-              key={type}
-              onClick={() => setSelectedType(type)}
+              key={type.value}
+              onClick={() => setSelectedType(type.value)}
               className={`px-3 py-1.5 rounded-lg text-sm capitalize border transition-all ${
-                selectedType === type
+                selectedType === type.value
                   ? "bg-blue-900 text-white border-blue-900 shadow-md"
                   : "border-gray-300 text-gray-700 hover:bg-blue-50"
               }`}
             >
-              {type}
+              {type.label}
             </button>
           ))}
         </div>
@@ -60,8 +79,9 @@ function PropertyFilterSidebar({
       {/* Budget */}
       <div className="mb-8">
         <h3 className="text-sm font-semibold text-blue-900 mb-2">
-          Max Budget (₹)
+          Max Monthly Budget (₹)
         </h3>
+
         <input
           type="number"
           value={budget}
@@ -73,25 +93,46 @@ function PropertyFilterSidebar({
         />
       </div>
 
-      {/* Distance */}
-      <div className="mb-2">
+      {/* Area Filter */}
+      <div className="mb-8">
         <h3 className="text-sm font-semibold text-blue-900 mb-2">
-          Distance (KM)
+          Minimum Area (sq ft)
         </h3>
+
         <input
-          type="range"
-          min="1"
-          max="20"
-          value={range}
-          onChange={(e) => setRange(e.target.value)}
-          className="w-full accent-orange-500"
+          type="number"
+          value={minArea}
+          onChange={(e) => setMinArea(e.target.value)}
+          placeholder="Ex: 5000"
+          className="w-full px-3 py-2 border rounded-md 
+                     border-blue-900/30 text-gray-800 focus:ring-2 
+                     focus:ring-orange-500 shadow-sm"
         />
-        <p className="text-sm text-gray-700 mt-1 font-medium">
-          {range} km
-        </p>
       </div>
+
+      {/* Facilities */}
+      <div>
+        <h3 className="text-sm font-semibold text-blue-900 mb-3">
+          Required Facilities
+        </h3>
+
+        <div className="flex flex-wrap gap-2">
+          {facilities.map((f) => (
+            <button
+              key={f}
+              onClick={() => toggleFacility(f)}
+              className={`px-3 py-1.5 text-sm rounded-lg border transition cursor-pointer ${
+                selectedFacilities.includes(f)
+                  ? "bg-orange-500 text-white border-orange-500 shadow"
+                  : "border-gray-300 text-gray-700 hover:bg-orange-50"
+              }`}
+            >
+              {f}
+            </button>
+          ))}
+        </div>
+      </div>
+
     </aside>
   );
 }
-
-export default PropertyFilterSidebar;
