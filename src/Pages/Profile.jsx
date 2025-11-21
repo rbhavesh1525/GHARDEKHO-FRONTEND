@@ -30,7 +30,7 @@ export default function Profile() {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="ml-64 min-h-screen p-12 bg-gray-50"
+      className="ml-64 min-h-screen p-12 mt-5 bg-gray-50"
     >
       <Card className="shadow-md max-w-3xl mx-auto border border-blue-900/20 rounded-2xl">
         <CardHeader className="flex items-center justify-between pb-2">

@@ -99,7 +99,7 @@ export default function Notifications() {
   const unreadCount = notifications.filter((n) => !n.is_read).length;
 
   return (
-    <div className="min-h-screen py-22 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen ml-64 py-22 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
 
         {/* Header */}

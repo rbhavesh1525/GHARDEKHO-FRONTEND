@@ -57,35 +57,47 @@ export default function PopularOwnerProperties() {
     <div className="px-6 md:px-16 lg:px-36 py-14">
 
       {/* 🔥 Rotating Heading */}
-      <div className="flex items-center justify-between">
-        <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 flex gap-2">
-          <span>Amazing</span>
+<div className="flex items-center justify-between">
+  <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-blue-900 flex gap-2">
+    <span>Amazing</span>
 
-          <div className="relative h-10 min-w-[150px] overflow-hidden inline-flex">
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={wordIndex}
-                initial={{ y: -40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 40, opacity: 0 }}
-                transition={{ duration: 0.45 }}
-                className="absolute left-0 text-orange-500 font-bold"
-              >
-                {rotatingWords[wordIndex]}
-              </motion.span>
-            </AnimatePresence>
-          </div>
+    {/* Dynamic auto width — no fixed size now */}
+    <div className="relative inline-block h-10">
+  
+  {/* Invisible span to TAKE WIDTH of the current word */}
+  <span className="opacity-0 font-bold">
+    {rotatingWords[wordIndex]}
+  </span>
 
-          <span>for you</span>
-        </div>
+  {/* Animated visible word */}
+  <AnimatePresence mode="wait">
+    <motion.span
+      key={wordIndex}
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: 40, opacity: 0 }}
+      transition={{ duration: 0.45 }}
+      className="absolute top-0 left-0 text-orange-500 font-bold whitespace-nowrap"
+    >
+      {rotatingWords[wordIndex]}
+    </motion.span>
+  </AnimatePresence>
+</div>
 
-        <button
-          onClick={() => navigate("/allproperties")}
-          className="text-blue-900 font-semibold underline hover:text-orange-600 text-lg"
-        >
-          Explore all properties →
-        </button>
-      </div>
+
+    <span>for you</span>
+  </div>
+
+  {/* 🔥 Add animation + cursor pointer */}
+  <button
+    onClick={() => navigate("/allproperties")}
+    className="text-blue-900 font-semibold underline text-lg cursor-pointer 
+               hover:text-orange-600 transition-all hover:translate-x-1"
+  >
+    Explore all properties →
+  </button>
+</div>
+
 
       {/* 🔥 PERFECT CAROUSEL */}
       <div
@@ -165,9 +177,12 @@ export default function PopularOwnerProperties() {
                   View Details
                 </Button>
 
-                <Button className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl">
-                  Contact
-                </Button>
+               <Button
+  className="bg-blue-900 hover:bg-blue-800 text-white rounded-xl cursor-pointer"
+  onClick={() => navigate(`/propertydetails?id=${p.id}`)}
+>
+  Contact
+</Button>
               </div>
             </div>
           </motion.div>

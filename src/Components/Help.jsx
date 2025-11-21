@@ -50,7 +50,7 @@ export default function Help() {
   );
 
   return (
-    <div className="min-h-screen py-22 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen ml-64 py-22 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           

@@ -1,12 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+
 import category1 from "../assets/Images/category1.jpg";
-import category2 from "../assets/Images/category2.jpg"
-import category3 from "../assets/Images/category3.jpg"
-import category4 from "../assets/Images/category4.jpg"
-import { PopularOwnerProperties } from "./PageIndex";
-import { MostVisitedProperties } from "./PageIndex";
+import category2 from "../assets/Images/category2.jpg";
+import category3 from "../assets/Images/category3.jpg";
+import category4 from "../assets/Images/category4.jpg";
+
+import { PopularOwnerProperties, MostVisitedProperties } from "./PageIndex";
+
 export default function PropertyCategories() {
   const data = [
     {
@@ -18,7 +20,7 @@ export default function PropertyCategories() {
     {
       title: "Projects",
       subtitle: "",
-      image:category2,
+      image: category2,
       link: "/projects",
     },
     {
@@ -37,67 +39,74 @@ export default function PropertyCategories() {
 
   return (
     <>
-    <section className="w-full py-16">
-      <div className="max-w-7xl mx-auto px-6">
+      <section className="w-full py-16">
+        <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-3xl font-semibold text-gray-900">
-          We've got properties in Pune for everyone
-        </h2>
-        <div className="w-14 h-[3px] bg-red-500 mt-2 mb-10"></div>
+          {/* Heading */}
+          <h2 className="text-3xl font-semibold text-gray-900">
+            We've got properties in Pune for everyone
+          </h2>
+          <div className="w-14 h-[3px] bg-red-500 mt-2 mb-10"></div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-{data.map((item, index) => (
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+           {data.map((item, index) => (
   <Link to={item.link} key={index}>
-    <div className="relative rounded-xl overflow-hidden cursor-pointer shadow-md bg-gray-200 group">
-
-      {/* IMAGE ONLY ZOOMS */}
-      <div className="w-full h-48 bg-gray-300 overflow-hidden">
-        <motion.img
+    <motion.div
+      className="relative rounded-xl cursor-pointer shadow-md bg-gray-200"
+    >
+      {/* IMAGE ZOOM */}
+      <motion.div
+        className="w-full h-48 overflow-hidden"
+        whileHover={{ scale: 1.2 }} // <- This is the key part!
+        initial={{ scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <img
           src={item.image}
           alt=""
           className="w-full h-full object-cover"
-          whileHover={{ scale: 1.15 }}
-          transition={{ duration: 0.4 }}
         />
-      </div>
+      </motion.div>
 
-      {/* BLACK GRADIENT OVERLAY */}
+      {/* DARK GRADIENT OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
-      {/* TEXT FIXED */}
-      <div className="absolute bottom-4 left-4 text-white select-none">
-        <h3 className="text-2xl font-bold drop-shadow-md">
-          {item.title}
-        </h3>
-        <p className="text-lg drop-shadow-md">
-          {item.subtitle}
-        </p>
-
-        {/* ONLY SHOW EXPLORE IF NOT CARD 3 */}
+      {/* TEXT */}
+      <div className="absolute bottom-4 left-4 text-white">
+        <h3 className="text-2xl font-bold drop-shadow-md">{item.title}</h3>
+        <p className="text-lg drop-shadow-md">{item.subtitle}</p>
         {index !== 2 && (
-          <div className="mt-1 flex items-center gap-1 text-sm underline">
-            Explore{" "}
+          <motion.div
+            className="mt-1 flex items-center gap-1 text-sm underline"
+            whileHover={{ x: 6 }}
+            initial={{ x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            Explore
             <motion.span
-              whileHover={{ x: 6 }}
+              whileHover={{ x: 10 }}
+              initial={{ x: 0 }}
               transition={{ duration: 0.3 }}
-              className="inline-block"
             >
               →
             </motion.span>
-          </div>
+          </motion.div>
         )}
       </div>
-
-    </div>
+    </motion.div>
   </Link>
 ))}
 
 
+          </div>
         </div>
-      </div>
-    </section>
-    <PopularOwnerProperties/>
-    <MostVisitedProperties/>
+      </section>
+
+      {/* Other Components */}
+      <PopularOwnerProperties />
+      <MostVisitedProperties />
     </>
   );
 }
