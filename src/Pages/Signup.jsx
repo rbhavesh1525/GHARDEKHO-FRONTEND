@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-
-
-
+import { setUpRecaptcha } from "../firebase";    // <-- IMPORTANT
+// import axios if needed in future
 
 export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -14,6 +14,7 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
   });
 
   const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(false); // <-- for button loading
 
   useEffect(() => {
     const filled = Object.values(formData).filter((v) => v.trim() !== "").length;
@@ -22,17 +23,56 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
 
   if (!open) return null;
 
-  const handleSignup = (e) => {
+  // 🔥 MAIN OTP FUNCTION
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    // Later backend API
-    onOpenOTP(formData.phone);
-    onClose();
+    if (
+      !formData.name ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword
+    ) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    // Convert phone number to +91 format
+    const formattedPhone = formData.phone.startsWith("+91")
+      ? formData.phone
+      : `+91${formData.phone}`;
+
+    try {
+      setLoading(true);
+
+      // 🔥 Step 1 → Send OTP via Firebase
+      const confirmation = await setUpRecaptcha(formattedPhone);
+
+      // 🔥 Step 2 → Store confirmation globally to use in OTP modal
+      window.confirmationResult = confirmation;
+
+      // 🔥 Step 3 → Open OTP modal
+      onOpenOTP(formData);
+
+      // 🔥 Step 4 → Close Signup modal
+      onClose();
+
+    } catch (err) {
+      console.error("Error sending OTP:", err);
+      alert("Failed to send OTP");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[9999] p-4">
-
       {/* Close Button */}
       <button
         onClick={onClose}
@@ -92,8 +132,9 @@ export default function Signup({ open, onClose, onOpenLogin, onOpenOTP }) {
             type="submit"
             className="w-full bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-lg 
                        font-semibold shadow-md transition cursor-pointer"
+            disabled={loading}
           >
-            Sign Up
+            {loading ? "Sending OTP..." : "Sign Up"}
           </button>
         </form>
 

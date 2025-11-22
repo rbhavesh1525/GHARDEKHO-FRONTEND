@@ -21,6 +21,9 @@ function App() {
 
   const location = useLocation();  
 
+  const [signupData, setSignupData] = useState(null);
+
+
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
   const [openOTP, setOpenOTP] = useState(false);
@@ -30,7 +33,7 @@ function App() {
 
   return (
     <>
-   
+      <div id="recaptcha-container"></div>
       {!hideNavbarRoutes.includes(location.pathname.toLowerCase()) && (
         <TopNavbar
           onOpenLogin={() => setOpenLogin(true)}
@@ -80,24 +83,27 @@ function App() {
           setOpenSignup(false);
           setOpenLogin(true);
         }}
-        onOpenOTP={(phone) => {
-          setMobileNumber(phone);
+        onOpenOTP={(data) => {
+
+          setMobileNumber(data.phone);
           setOpenSignup(false);
           setOpenOTP(true);
         }}
       />
 
-      <OTPVerification
-        open={openOTP}
-        mobile={mobileNumber}
-        onClose={() => setOpenOTP(false)}
-        onChangeNumber={() => {
-          setOpenOTP(false);
-          setOpenSignup(true);
-        }}
-        onVerify={(otp) => console.log("Verify OTP:", otp)}
-        onResend={() => console.log("Resend OTP")}
-      />
+    <OTPVerification
+  open={openOTP}
+  mobile={mobileNumber}
+  signupData={signupData}
+  onClose={() => setOpenOTP(false)}
+  onChangeNumber={() => {
+    setOpenOTP(false);
+    setOpenSignup(true);
+  }}
+  onVerify={(otp) => console.log("Verify OTP:", otp)}
+  onResend={() => console.log("Resend OTP")}
+/>
+
     </>
   );
 }
